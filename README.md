@@ -8,6 +8,12 @@ scrot
 xclip
 telegram
 ```
+**for theming:**
+```
+lxappearance
+gtk-chtheme
+qt4-qtconfig
+```
 
 ### Extra setup
 

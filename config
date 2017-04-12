@@ -138,9 +138,9 @@ bindsym --release Print exec "scrot -s -m /tmp/scrot_screenshot.png; xclip -sele
 # Colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #00619f #00619f #ffffff #00619f   #285577
-client.focused_inactive #222222 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #222222 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.focused_inactive #2F343F #2F343F #999999 #484e50   #24272d
+client.unfocused        #2F343F #2F343F #999999 #292d2e   #24272d
+client.urgent           #9f0000 #9f0000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
@@ -148,14 +148,14 @@ client.background       #ffffff
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
 	colors {
-		background         #333333
+		background         #2F343F 
 		statusline         #44b6ff
 		separator          #44b6ff
 
 		# Type             border  backg.  font
 		focused_workspace  #00619f #00619f #ffffff
-		active_workspace   #5f676a #5f676a #ffffff
-		inactive_workspace #222222 #222222 #888888
+		active_workspace   #2F343F #2F343F #999999
+		inactive_workspace #2F343F #2F343F #999999
 		urgent_workspace   #990000 #990000 #ffffff
 	}
   font                 pango:Monospace Bold 10
@@ -168,4 +168,4 @@ hide_edge_borders both
 
 #Place the external monitor on top
 #To get screen names: xrandr --listactivemonitors
-xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440
+#xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440
