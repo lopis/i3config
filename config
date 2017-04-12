@@ -163,3 +163,9 @@ bar {
 	position             top
 	status_command       i3status -c ~/.config/i3/i3status.conf
 }
+
+hide_edge_borders both
+
+#Place the external monitor on top
+#To get screen names: xrandr --listactivemonitors
+xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440
