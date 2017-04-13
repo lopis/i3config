@@ -148,7 +148,7 @@ client.background       #ffffff
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
 	colors {
-		background         #2F343F 
+		background         #2F343F
 		statusline         #44b6ff
 		separator          #44b6ff
 
@@ -169,3 +169,15 @@ hide_edge_borders both
 #Place the external monitor on top
 #To get screen names: xrandr --listactivemonitors
 #xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440
+
+# launch Calculator
+bindsym $mod+c exec "gnome-calculator"
+
+#_vga=$( xrandr  | sed -n 's/^\(VGA.\).*/\1/pg')
+#alias laptop='xrandr --output LVDS1 --auto --output $_vga --off'
+#alias monitor='xrandr --output LVDS1 --off --output $_vga --auto'
+bindsym $mod+p exec 'xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440'
+bindsym $mod+shift+p exec 'xrandr --output eDP1 --auto --pos 0x0 --output DP1 --off'
+
+# Startup Network Manager applet
+exec --no-startup-id nm-applet
