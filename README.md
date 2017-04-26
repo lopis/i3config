@@ -22,6 +22,8 @@ qt4-qtconfig
 
 * Change theme in `lxappearance` `gtk-chtheme` and `qt4-qtconfig`
 
+* Setup the gnome keyring: https://wiki.archlinux.org/index.php/GNOME/Keyring
+
 ### Current issues
 
 * no keyring

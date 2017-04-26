@@ -4,7 +4,7 @@
 #Mod4 = super key
 set $mod Mod4
 
-font pango: Monospace 0px
+font pango: Ubuntu 0px
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -57,7 +57,7 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -175,7 +175,7 @@ bar {
 		inactive_workspace #2F343F #2F343F #999999
 		urgent_workspace   #990000 #990000 #ffffff
 	}
-  font                 pango:Monospace Bold 10
+  font                 pango:Ubuntu Bold 10
   tray_output          primary
 	position             top
 	status_command       i3status -c ~/.config/i3/i3status.conf
@@ -198,3 +198,12 @@ bindsym $mod+shift+p exec 'xrandr --output eDP1 --auto --pos 0x0 --output DP1 --
 
 # Startup Network Manager applet
 exec --no-startup-id nm-applet
+
+#Enable natural scrolling
+exec --no-startup-id synclient HorizEdgeScroll=0 VertEdgeScroll=0 HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertScrollDelta=-90 HorizScrollDelta=-90
+
+
+exec --no-startup-id "/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh; export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK"
+
+# Open file manager
+bindsym $mod+e exec --no-startup-id spacefm
