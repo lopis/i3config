@@ -7,6 +7,7 @@ myi3config
 scrot
 xclip
 telegram
+spacefm (file manager)
 ```
 **for theming:**
 
@@ -21,6 +22,8 @@ qt4-qtconfig
 * Make Telegram executable from the Terminal: `sudo ln -s /opt/telegram/telegram /usr/local/bin/telegram`
 
 * Change theme in `lxappearance` `gtk-chtheme` and `qt4-qtconfig`
+
+* Setup the gnome keyring: https://wiki.archlinux.org/index.php/GNOME/Keyring
 
 ### Current issues
 
