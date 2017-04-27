@@ -181,3 +181,11 @@ bindsym $mod+shift+p exec 'xrandr --output eDP1 --auto --pos 0x0 --output DP1 --
 
 # Startup Network Manager applet
 exec --no-startup-id nm-applet
+
+# Fullscreen window to floating
+bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
+
+# Volume control
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 2%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- unmute
+bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
