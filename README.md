@@ -9,13 +9,6 @@ xclip
 telegram
 spacefm (file manager)
 ```
-**for theming:**
-
-```
-lxappearance
-gtk-chtheme
-qt4-qtconfig
-```
 
 ### Extra setup
 
@@ -29,4 +22,3 @@ qt4-qtconfig
 
 * no keyring
 * not saving/restoring workspace layouts
-* media/volume buttons not setup
