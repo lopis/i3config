@@ -22,28 +22,20 @@ bindsym $mod+d exec dmenu_run
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ccedilla focus right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+ccedilla move right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+# switch to workspace
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+Right workspace next
 
 # split in horizontal orientationg
 bindsym $mod+h split h
@@ -203,9 +195,26 @@ exec --no-startup-id nm-applet
 bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
 
 # Volume control
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 2%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- unmute
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 2%+,2% unmute
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%-,2% unmute
 bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
+# Balancec control
+bindsym Shift+XF86AudioRaiseVolume exec "amixer -D pulse sset Master 5%+,5%- unmute"
+bindsym Shift+XF86AudioLowerVolume exec "amixer -D pulse sset Master 5%-,5%+ unmute"
+bindsym Shift+XF86AudioMute exec "amixer -D pulse sset Master 0%"
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Sreen brightness controlsS
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 #Enable natural scrolling
 exec --no-startup-id synclient HorizEdgeScroll=0 VertEdgeScroll=0 HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertScrollDelta=-90 HorizScrollDelta=-90
@@ -214,3 +223,12 @@ exec --no-startup-id "/usr/bin/gnome-keyring-daemon --start --components=gpg,pkc
 
 # Open file manager
 bindsym $mod+e exec --no-startup-id spacefm
+
+# Connect to VPN
+bindsym $mod+Ctrl+V exec 'sudo ipsec up NordVPN'
+bindsym $mod+Ctrl+Shift+V exec 'sudo ipsec down NordVPN'
+
+# x-kill kills a window
+bindsym Ctrl+Shit+x exec 'xkill'
+
+bindsym $mod+Shift+s exec --no-startup-id /home/joao/.config/i3/monitors.sh
