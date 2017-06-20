@@ -5,9 +5,9 @@
 set $mod Mod4
 
 # custom variables for workspaces
-set $ws1 1
-set $ws2 2
-set $ws3 3
+set $ws1 "1: web"
+set $ws2 "2: txt"
+set $ws3 "3: chat"
 set $ws4 4
 set $ws5 5
 set $ws6 6
@@ -247,3 +247,5 @@ exec --no-startup-id telegram
 
 # Switch to workspace 1 at startup
 exec --no-startup-id i3-msg workspace $ws1
+
+# for_window [class="gdebi*"] floating enable
