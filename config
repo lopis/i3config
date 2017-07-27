@@ -5,9 +5,9 @@
 set $mod Mod4
 
 # custom variables for workspaces
-set $ws1 "1: web"
-set $ws2 "2: txt"
-set $ws3 "3: chat"
+set $ws1 1
+set $ws2 2
+set $ws3 3
 set $ws4 4
 set $ws5 5
 set $ws6 6
@@ -183,7 +183,7 @@ bar {
 		inactive_workspace #2F343F #2F343F #999999
 		urgent_workspace   #990000 #990000 #ffffff
 	}
-  font                 pango:Ubuntu Bold 10
+  font                 pango:Ubuntu Bold 11
   tray_output          primary
 	position             top
 	status_command       i3status -c ~/.config/i3/i3status.conf
@@ -202,19 +202,16 @@ bindsym $mod+c exec "gnome-calculator"
 #alias laptop='xrandr --output LVDS1 --auto --output $_vga --off'
 #alias monitor='xrandr --output LVDS1 --off --output $_vga --auto'
 bindsym $mod+p exec 'xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440'
-bindsym $mod+shift+p exec 'xrandr --output eDP1 --auto --pos 0x0 --output DP1 --off'
+bindsym $mod+Shift+p exec 'xrandr --output eDP1 --auto --pos 0x0 --output DP1 --off'
 
 # Startup Network Manager applet
 exec --no-startup-id nm-applet
 
-# Fullscreen window to floating
-bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
-
 # Volume control
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 2%+,2% unmute
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%-,2% unmute
-bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
-# Balancec control
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master 2%+,2%+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master 2%-,2%- unmute"
+bindsym XF86AudioMute exec "amixer -D pulse sset Master toggle"
+# Balance control
 bindsym Shift+XF86AudioRaiseVolume exec "amixer -D pulse sset Master 5%+,5%- unmute"
 bindsym Shift+XF86AudioLowerVolume exec "amixer -D pulse sset Master 5%-,5%+ unmute"
 bindsym Shift+XF86AudioMute exec "amixer -D pulse sset Master 0%"
@@ -227,6 +224,9 @@ bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+bindsym --release $mod+Caps_Lock exec "sleep 0.2; xdotool key f; i3-msg fullscreen toggle"
+
+
 
 # Sreen brightness controlsS
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -245,16 +245,17 @@ bindsym $mod+Ctrl+V exec 'sudo ipsec up NordVPN'
 bindsym $mod+Ctrl+Shift+V exec 'sudo ipsec down NordVPN'
 
 # x-kill kills a window
-bindsym Ctrl+Shit+x exec 'xkill'
+bindsym $mod+Ctrl+X --release exec --no-startup-id xkill
 
-bindsym $mod+Shift+s exec --no-startup-id /home/joao/.config/i3/monitors.sh
+bindsym $mod+Ctrl+S exec --no-startup-id /home/joao/.config/i3/monitors.sh
 
 ## Workspace specific settings
 # Assign Workspaces:
-for_window [class="Firefox"] $ws1
-for_window [class="Atom"] $ws2
-for_window [class="HipChat"] $ws4
-for_window [class="Telegram"] $ws4
+for_window [class="Firefox"] move to workspace $ws1
+for_window [title="Popup"] floating enable
+for_window [class="Atom"] move to workspace $ws2
+for_window [class="HipChat"] move to workspace $ws3
+for_window [class="Telegram"] move to workspace $ws3
 
 # Startup apps
 exec --no-startup-id firefox-trunk
@@ -266,3 +267,6 @@ exec --no-startup-id telegram
 exec --no-startup-id i3-msg workspace $ws1
 
 # for_window [class="gdebi*"] floating enable
+
+# Autostart compositor
+exec --no-startup-id compton -b

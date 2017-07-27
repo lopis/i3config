@@ -1,6 +1,9 @@
 #!/bin/bash
-EXTERNAL_OUTPUT="DP1"
-INTERNAL_OUTPUT="eDP1"
+xrandr|grep " connected primary"|IFS=" " read -r INTERNAL_OUTPUT con
+xrandr|grep " connected$"|IFS=" " read -r EXTERNAL_OUTPUT con
+
+#EXTERNAL_OUTPUT="DP1"
+#INTERNAL_OUTPUT="eDP1"
 
 INTERNAL_POS="0x1440"
 EXTERNAL_POS="0x0"
@@ -14,7 +17,7 @@ else
   monitor_mode=`cat /tmp/monitor_mode.dat`
 fi
 
-xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440
+xrandr --output $EXTERNAL_OUTPUT --auto --pos 1920x0 --output $INTERNAL_OUTPUT --auto --pos 0x360
 
 if [ $monitor_mode = "all" ]; then
         monitor_mode="EXTERNAL"
