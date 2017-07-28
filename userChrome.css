@@ -1,0 +1,26 @@
+#tabbrowser-tabs {
+  visibility: collapse !important;
+}
+
+#sidebar-box {
+  overflow-x: hidden;
+  min-width: 5em !important;
+  width: 5em !important;
+  margin-top: -37px;
+}
+
+.sidebar-header, #sidebar-header {
+  display: none !important;
+}
+
+.tab-title-wrapper {
+  display: none !important;
+}
+
+#newtab-label, #newtab  {
+  display: none !important;
+}
+
+#settings {
+  display: none !important;
+}
