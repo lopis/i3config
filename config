@@ -157,7 +157,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+ctrl+l exec --no-startup-id i3lock -c 000000
 
 #screenshots
-bindsym $mod+Print exec "scrot -m /tmp/scrot_screenshot.png; xclip -selection clipboard -t image/png -i /tmp/scrot_screenshot.png; rm /tmp/scrot_screenshot.png -f"
+bindsym --release $mod+Print exec "scrot -m /tmp/scrot_screenshot.png; xclip -selection clipboard -t image/png -i /tmp/scrot_screenshot.png; rm /tmp/scrot_screenshot.png -f"
 bindsym --release Print exec "scrot -s -m /tmp/scrot_screenshot.png; xclip -selection clipboard -t image/png -i /tmp/scrot_screenshot.png; rm /tmp/scrot_screenshot.png -f"
 
 # Colors
