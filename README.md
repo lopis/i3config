@@ -8,6 +8,7 @@ scrot
 xclip
 telegram
 spacefm (file manager)
+xdotool (for youtube floaty)
 ```
 
 ### Extra setup
