@@ -4,17 +4,18 @@
 
 #sidebar-box {
   overflow-x: hidden;
-  min-width: 5em !important;
-  width: 5em !important;
+  min-width: 0 !important;
+}
+
+#sidebar-header {
+  position: relative;
+  z-index: 1;
+}
+/* Hides tab center header (search bar) */
+#sidebar {
   margin-top: -37px;
-}
-
-.sidebar-header, #sidebar-header {
-  display: none !important;
-}
-
-.tab-title-wrapper {
-  display: none !important;
+  position: relative;
+  z-index: 0;
 }
 
 #newtab-label, #newtab  {
@@ -23,4 +24,14 @@
 
 #settings {
   display: none !important;
+}
+
+/* Hides sidebar switcher text */
+#sidebar-switcher-target label {
+  display: none;
+}
+
+/* Hides sidebar close button */
+#sidebar-close {
+  display: none;
 }
