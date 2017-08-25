@@ -40,3 +40,7 @@
 #sidebar-close {
   display: none;
 }
+
+browser.webextension-devtoolsPanel-browser div {
+  padding-left: 1px !important;
+}
