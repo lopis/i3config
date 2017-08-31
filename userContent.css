@@ -1,0 +1,38 @@
+#certErrorAndCaptivePortalButtonContainer #advancedButton {
+  flex-grow: 1;
+  padding: 15px;
+}
+
+#badCertAdvancedPanel {
+  position: relative;
+}
+
+#errorShortDesc,
+#certificateErrorReporting {
+  height: 0;
+  overflow: hidden;
+}
+
+.exceptionDialogButtonContainer {
+  position: absolute;
+  top: -103px;
+  padding: 0;
+  width: 100%;
+  background: none;
+}
+#exceptionDialogButton {
+  padding: 15px;
+  width: 100%;
+  background: #eb614d;
+  color: white;
+  font-weight: bold;
+}
+
+body.certerror {
+  justify-content: flex-start;
+  font-family: serif !important,
+}
+
+#returnButton {
+  display: none;
+}
