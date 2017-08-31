@@ -1,10 +1,10 @@
 #!/bin/bash
 xrandr|grep " connected primary"|IFS=" " read -r INTERNAL_OUTPUT con
-xrandr|grep " connected$"|IFS=" " read -r EXTERNAL_OUTPUT con
+xrandr|awk '/ connected/ && !/ primary/'|IFS=" " read -r EXTERNAL_OUTPUT con
 
 #EXTERNAL_OUTPUT="DP1"
 #INTERNAL_OUTPUT="eDP1"
-# 
+#
 # INTERNAL_POS="0x1440"
 # EXTERNAL_POS="0x0"
 #
