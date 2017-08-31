@@ -7,20 +7,44 @@
   visibility: collapse !important;
 }
 
-#sidebar-box {
+#sidebar-box,
+#sidebar-box #sidebar-header {
   overflow-x: hidden;
-  min-width: 0 !important;
+  transition: min-width 0.2s ease;
+  min-width: 74px !important;
+}
+
+#sidebar-box[sidebarcommand="viewHistorySidebar"],
+#sidebar-box[sidebarcommand="viewHistorySidebar"],
+#sidebar-box[sidebarcommand="viewTabsSidebar"],
+#sidebar-box[sidebarcommand="viewTabsSidebar"] #sidebar-header,
+#sidebar-box[sidebarcommand="viewBookmarksSidebar"] #sidebar-header,
+#sidebar-box[sidebarcommand="viewBookmarksSidebar"] #sidebar-header {
+  min-width: 300px !important;
+}
+
+#sidebar-box[sidebarcommand="viewHistorySidebar"] #sidebar,
+#sidebar-box[sidebarcommand="viewHistorySidebar"] #sidebar,
+#sidebar-box[sidebarcommand="viewTabsSidebar"] #sidebar {
+  margin-top: 0;
 }
 
 #sidebar-header {
   position: relative;
   z-index: 1;
+  background: #FEFEFE;
+  border-right: 1px solid #EAEAEA;
+  transition: margin 0.2s ease;
 }
 /* Hides tab center header (search bar) */
 #sidebar {
   margin-top: -37px;
   position: relative;
   z-index: 0;
+}
+
+#sidebar-throbber {
+  display: none;
 }
 
 #newtab-label, #newtab  {
@@ -32,8 +56,12 @@
 }
 
 /* Hides sidebar switcher text */
-#sidebar-switcher-target label {
+#sidebar-title, #sidebar-switcher-arrow {
   display: none;
+}
+
+#sidebar-switcher-arrow {
+  margin-left: -14px;
 }
 
 /* Hides sidebar close button */
