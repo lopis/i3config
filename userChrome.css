@@ -1,3 +1,8 @@
+/*
+ * To use this file, run:
+ * ln ./.config/i3/userChrome.css .mozilla/<profilepath>/chrome/userChrome.css
+ */
+
 #tabbrowser-tabs {
   visibility: collapse !important;
 }
