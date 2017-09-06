@@ -4,8 +4,8 @@
  */
 
 #certErrorAndCaptivePortalButtonContainer #advancedButton {
-  flex-grow: 1;
-  padding: 15px;
+  flex-grow: 1 !important;
+  padding: 15px !important;
 }
 
 #badCertAdvancedPanel {
@@ -19,23 +19,23 @@
 }
 
 .exceptionDialogButtonContainer {
-  position: absolute;
-  top: -103px;
-  padding: 0;
-  width: 100%;
-  background: none;
+  position: absolute !important;
+  top: -103px !important;
+  padding: 0 !important;
+  width: 100% !important;
+  background: none !important;
 }
+
 #exceptionDialogButton {
-  padding: 15px;
-  width: 100%;
-  background: #eb614d;
-  color: white;
-  font-weight: bold;
+  padding: 15px !important;
+  width: 100% !important;
+  background: #eb614d !important;
+  color: white !important;
+  font-weight: bold !important;
 }
 
 body.certerror {
-  justify-content: flex-start;
-  font-family: serif !important,
+  justify-content: flex-start !important;
 }
 
 #returnButton {

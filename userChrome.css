@@ -15,10 +15,10 @@
 }
 
 #sidebar-box[sidebarcommand="viewHistorySidebar"],
-#sidebar-box[sidebarcommand="viewHistorySidebar"],
+#sidebar-box[sidebarcommand="viewHistorySidebar"] #sidebar-header,
 #sidebar-box[sidebarcommand="viewTabsSidebar"],
 #sidebar-box[sidebarcommand="viewTabsSidebar"] #sidebar-header,
-#sidebar-box[sidebarcommand="viewBookmarksSidebar"] #sidebar-header,
+#sidebar-box[sidebarcommand="viewBookmarksSidebar"],
 #sidebar-box[sidebarcommand="viewBookmarksSidebar"] #sidebar-header {
   min-width: 300px !important;
 }
