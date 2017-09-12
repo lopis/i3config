@@ -7,7 +7,7 @@
   margin-top: 0 !important;
 }
 #certErrorAndCaptivePortalButtonContainer #advancedButton {
-  flex-grow: 1;
+  flex-grow: 1 !important;
   padding: 15px !important;
 }
 
@@ -22,23 +22,23 @@
 }
 
 .exceptionDialogButtonContainer {
-  position: absolute;
-  top: -103px;
+  position: absolute !important;
+  top: -103px !important;
   padding: 0 !important;
-  width: 100%;
-  background: none;
+  width: 100% !important;
+  background: none !important;
 }
+
 #exceptionDialogButton {
   padding: 15px !important;
-  width: 100%;
+  width: 100% !important;
   background: #eb614d !important;
   color: white !important;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 body.certerror {
   justify-content: flex-start !important;
-  font-family: serif !important;
 }
 
 #returnButton {
