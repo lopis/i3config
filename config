@@ -75,6 +75,9 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+z focus child
 
+bindsym $mod+greater move workspace to output up
+bindsym $mod+less move workspace to output down
+
 # switch to workspace
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -183,7 +186,7 @@ bar {
 		inactive_workspace #2F343F #2F343F #999999
 		urgent_workspace   #990000 #990000 #ffffff
 	}
-  font                 pango:Ubuntu Bold 11
+  font                 pango: Ubuntu Bold 10.5
   tray_output          primary
 	position             top
   status_command       i3blocks -c ~/.config/i3/i3blocks.conf
@@ -242,7 +245,7 @@ exec --no-startup-id synclient HorizEdgeScroll=0 VertEdgeScroll=0 HorizTwoFinger
 exec --no-startup-id "/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh; export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK"
 
 # Open file manager
-bindsym $mod+e exec --no-startup-id spacefm
+bindsym $mod+e exec --no-startup-id nautilus
 
 # Connect to VPN
 bindsym $mod+Ctrl+V exec 'sudo ipsec up NordVPN'

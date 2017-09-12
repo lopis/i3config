@@ -3,9 +3,12 @@
  * ln ./.config/i3/userContent.css .mozilla/<profilepath>/chrome/userContent.css
  */
 
+#certErrorAndCaptivePortalButtonContainer {
+  margin-top: 0 !important;
+}
 #certErrorAndCaptivePortalButtonContainer #advancedButton {
   flex-grow: 1;
-  padding: 15px;
+  padding: 15px !important;
 }
 
 #badCertAdvancedPanel {
@@ -21,21 +24,21 @@
 .exceptionDialogButtonContainer {
   position: absolute;
   top: -103px;
-  padding: 0;
+  padding: 0 !important;
   width: 100%;
   background: none;
 }
 #exceptionDialogButton {
-  padding: 15px;
+  padding: 15px !important;
   width: 100%;
-  background: #eb614d;
-  color: white;
+  background: #eb614d !important;
+  color: white !important;
   font-weight: bold;
 }
 
 body.certerror {
-  justify-content: flex-start;
-  font-family: serif !important,
+  justify-content: flex-start !important;
+  font-family: serif !important;
 }
 
 #returnButton {
