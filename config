@@ -112,7 +112,6 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-
 # Shows a prompt to exit or power down the computer
 set $Locker i3lock && sleep 1
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -165,10 +164,11 @@ bindsym --release Print exec "scrot -s -m /tmp/scrot_screenshot.png; xclip -sele
 
 # Colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #00619f #00619f #ffffff #00619f   #285577
+#client.focused          #00619f #00619f #ffffff #00619f   #285577
+client.focused          #950835 #950835 #ffffff #950835   #285577
 client.focused_inactive #2F343F #2F343F #999999 #484e50   #24272d
 client.unfocused        #2F343F #2F343F #999999 #292d2e   #24272d
-client.urgent           #9f0000 #9f0000 #ffffff #900000   #900000
+client.urgent           #9f9f00 #9f9f00 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
@@ -176,15 +176,16 @@ client.background       #ffffff
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
 	colors {
-		background         #2F343F
+		#background         #2F343F
+		background         #362F32
 		statusline         #44b6ff
 		separator          #44b6ff
 
 		# Type             border  backg.  font
-		focused_workspace  #00619f #00619f #ffffff
+		focused_workspace  #950835 #950835 #ffffff
 		active_workspace   #2F343F #2F343F #999999
 		inactive_workspace #2F343F #2F343F #999999
-		urgent_workspace   #990000 #990000 #ffffff
+		urgent_workspace   #9f9f00 #9f9f00 #ffffff
 	}
   font                 pango: Ubuntu Bold 10.5
   tray_output          primary
@@ -255,7 +256,22 @@ bindsym $mod+Ctrl+Shift+V exec 'sudo ipsec down NordVPN'
 bindsym $mod+Ctrl+X --release exec --no-startup-id xkill
 
 # Refresh monitor setup (not working)
-bindsym $mod+Ctrl+S exec --no-startup-id /home/joao/.config/i3/monitors.sh
+# bindsym $mod+Ctrl+S exec --no-startup-id /home/joao/.config/i3/monitors.sh
+
+# Shows a prompt to choose monitor mode
+set $mode_monitors Monitor Mode (e) external, (i) internal, (a) all, (m) mirror, (c) cycle
+mode "$mode_monitors" {
+    bindsym e exec --no-startup-id /home/joao/.config/i3/monitors.sh external, mode "default"
+    bindsym i exec --no-startup-id /home/joao/.config/i3/monitors.sh internal, mode "default"
+    bindsym a exec --no-startup-id /home/joao/.config/i3/monitors.sh all, mode "default"
+    bindsym m exec --no-startup-id /home/joao/.config/i3/monitors.sh mirror, mode "default"
+    bindsym c exec --no-startup-id /home/joao/.config/i3/monitors.sh, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+ctrl+s mode "$mode_monitors"
 
 # Reset counter
 bindsym $mod+Ctrl+0 exec rm -rf /tmp/termdown.tmp && xterm -e termdown -c 10 --no-seconds -t "## BREAK ##" -q 1 --no-figlet --no-text-magic -o /tmp/termdown.tmp 2400
@@ -270,10 +286,10 @@ for_window [class="HipChat"] move to workspace $ws3
 for_window [class="Telegram"] move to workspace $ws3
 
 # Startup apps
-### exec --no-startup-id firefox-trunk
-### exec --no-startup-id atom
-### exec --no-startup-id hipchat4
-### exec --no-startup-id telegram
+exec --no-startup-id firefox-trunk
+exec --no-startup-id atom
+exec --no-startup-id hipchat4
+exec --no-startup-id telegram
 
 # Switch to workspace 1 at startup
 exec --no-startup-id i3-msg workspace $ws1
