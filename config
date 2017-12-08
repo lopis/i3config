@@ -16,7 +16,7 @@ set $ws8 8
 set $ws9 9
 set $ws10 10
 
-font pango: Ubuntu 0px
+font pango: Ubuntu 14px
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -162,32 +162,34 @@ bindsym $mod+ctrl+l exec --no-startup-id i3lock -c 000000
 bindsym --release $mod+Print exec "scrot -m /tmp/scrot_screenshot.png; xclip -selection clipboard -t image/png -i /tmp/scrot_screenshot.png; rm /tmp/scrot_screenshot.png -f"
 bindsym --release Print exec "scrot -s -m /tmp/scrot_screenshot.png; xclip -selection clipboard -t image/png -i /tmp/scrot_screenshot.png; rm /tmp/scrot_screenshot.png -f"
 
+#emoji
+bindsym $mod+shift+e exec i3-input -P 'emojify:' -F "exec emojify :%s: | tr -d '\n' | xclip -selection clipboard"
+#emojify ":bee:" | awk '{$1=$1};1' | xclip -selection clipboard
+
 # Colors
 # class                 border  backgr. text    indicator child_border
-#client.focused          #00619f #00619f #ffffff #00619f   #285577
-client.focused          #950835 #950835 #ffffff #950835   #285577
-client.focused_inactive #2F343F #2F343F #999999 #484e50   #24272d
-client.unfocused        #2F343F #2F343F #999999 #292d2e   #24272d
-client.urgent           #9f9f00 #9f9f00 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.focused          #001624 #001624 #6d8594 #001624   #285577
+client.focused_inactive #252a2d #252a2d #6d8594 #484e50   #24272d
+client.unfocused        #252a2d #252a2d #6d8594 #292d2e   #24272d
+client.urgent           #9f9f00 #9f9f00 #6d8594 #900000   #900000
+client.placeholder      #000000 #0c0c0c #6d8594 #000000   #0c0c0c
 
 client.background       #ffffff
 
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
 	colors {
-		#background         #2F343F
-		background         #362F32
-		statusline         #44b6ff
-		separator          #44b6ff
+		background         #252a2d
+		statusline         #6d8594
+		separator          #6d8594
 
 		# Type             border  backg.  font
-		focused_workspace  #950835 #950835 #ffffff
-		active_workspace   #2F343F #2F343F #999999
-		inactive_workspace #2F343F #2F343F #999999
-		urgent_workspace   #9f9f00 #9f9f00 #ffffff
+		focused_workspace  #001624 #001624 #6d8594
+		active_workspace   #252a2d #252a2d #6d8594
+		inactive_workspace #252a2d #252a2d #6d8594
+		urgent_workspace   #650505 #650505 #6d8594
 	}
-  font                 pango: Ubuntu Bold 10.5
+  font                 pango: Ubuntu Bold 12
   tray_output          primary
 	position             top
   status_command       i3blocks -c ~/.config/i3/i3blocks.conf

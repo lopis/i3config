@@ -3,7 +3,7 @@
  * ln ./.config/i3/userChrome.css .mozilla/<profilepath>/chrome/userChrome.css
  */
 
-#tabbrowser-tabs {
+#toolbar-menubar[inactive="true"] + #TabsToolbar {
   visibility: collapse !important;
 }
 
@@ -11,7 +11,7 @@
 #sidebar-box #sidebar-header {
   overflow-x: hidden;
   transition: min-width 0.2s ease;
-  min-width: 74px !important;
+  min-width: 3.5em !important;
 }
 
 #sidebar-box[sidebarcommand="viewHistorySidebar"],
@@ -36,11 +36,12 @@
   border-right: 1px solid #EAEAEA;
   transition: margin 0.2s ease;
 }
-/* Hides tab center header (search bar) */
 #sidebar {
+  /* Hides tab center header (search bar) */
   margin-top: -37px;
   position: relative;
   z-index: 0;
+  margin-left: -2px;
 }
 
 #sidebar-throbber {
@@ -72,3 +73,40 @@
 browser.webextension-devtoolsPanel-browser div {
   padding-left: 1px !important;
 }
+
+
+/* Extra Addon CSS */
+/*#tablist.shrinked .tab-meta-image {
+  background: white !important;
+  border-radius: 20%;
+  padding: 2px;
+  height: 32px;
+  width: 32px;
+  margin: 1px 5px;
+}
+#tablist.shrinked .tab-meta-image .tab-icon {
+  height: 28px;
+  width: 28px;
+  image-rendering: unset;
+}
+#tablist {
+  margin-top: 5px;
+}
+.tab {
+  margin-top: 5px;
+}
+.tab-title-wrapper::after,
+.tab:not(.pinned) > .tab-close {
+  display: none;
+}
+ul.contextmenu {
+  position: fixed !important;
+  left: 0 !important;
+  width: 100%;
+}
+ul.contextmenu > li {
+  padding: 4px 1px !important;
+}
+ul.contextmenu > :not(li) {
+  display: none;
+}*/
