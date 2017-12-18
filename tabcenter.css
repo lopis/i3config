@@ -1,0 +1,71 @@
+#tablist-wrapper.shrinked #pinnedtablist .tab-meta-image,
+#tablist-wrapper.shrinked #tablist .tab-meta-image {
+  background: white !important;
+  border-radius: 20%;
+  padding: 2px;
+  height: 32px;
+  width: 32px;
+  min-width: 32px;
+  margin: 1px 5px;
+}
+#tablist-wrapper.shrinked #pinnedtablist .tab-icon-wrapper,
+#tablist-wrapper.shrinked #tablist .tab-icon-wrapper {
+  margin: auto;
+}
+
+#pinnedtablist.compact .tab.pinned .tab-icon-wrapper,
+.tab-icon-wrapper {
+  height: 100%;
+  width: 100%;
+  padding: 3px;
+}
+#pinnedtablist.compact .tab.pinned:not(.loading) .tab-icon,
+#tablist-wrapper.shrinked .tab-meta-image .tab-icon {
+  height: 100%;
+  width: 100%;
+  image-rendering: unset;
+  margin: 0;
+}
+#tablist-wrapper.shrinked #tablist .tab.loading .tab-meta-image {
+  background: #ffffff1a !important;
+}
+.dark-theme #tablist-wrapper.shrinked .tab.loading .tab-icon-wrapper {
+  height: 100%;
+  width: 20px;
+  padding: 2px;
+}
+.dark-theme #tablist-wrapper.shrinked .tab.loading .tab-icon::before {
+
+}
+
+#tablist-wrapper {
+  margin-top: 5px;
+}
+.tab {
+  margin-top: 5px;
+}
+.tab-title-wrapper::after,
+.tab:not(.pinned) > .tab-close {
+  display: none;
+}
+ul.contextmenu {
+  position: fixed !important;
+  left: 0 !important;
+  width: 100%;
+}
+ul.contextmenu > li {
+  padding: 4px 1px !important;
+}
+ul.contextmenu > :not(li) {
+  display: none;
+}
+#tablist-wrapper.shrinked .tab-icon-overlay {
+  width: 18px;
+  height: 18px;
+  margin: 0 0 -13px -13px;
+  left: 21px;
+  top: auto;
+  bottom: 10px;
+  position: absolute;
+  background-color: white;
+}
