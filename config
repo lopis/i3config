@@ -239,8 +239,10 @@ bindsym --release $mod+Caps_Lock exec "sleep 0.2; xdotool key f; i3-msg fullscre
 
 
 # Sreen brightness controlsS
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A -b 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U -b 20 # decrease screen brightness
+bindsym Ctrl+XF86MonBrightnessUp exec light -A -b 2 # increase screen brightness
+bindsym Ctrl+XF86MonBrightnessDown exec light -U -b 2 # decrease screen brightness
 
 #Enable natural scrolling
 exec --no-startup-id synclient HorizEdgeScroll=0 VertEdgeScroll=0 HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertScrollDelta=-90 HorizScrollDelta=-90
