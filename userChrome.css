@@ -2,7 +2,7 @@
  * To use this file, run:
  * ln ./.config/i3/userChrome.css .mozilla/<profilepath>/chrome/userChrome.css
  */
-
+/* Hides the tab strip when the menu bar is hidden */
 #toolbar-menubar[inactive="true"] + #TabsToolbar {
   visibility: collapse !important;
 }
@@ -11,7 +11,7 @@
 #sidebar-box #sidebar-header {
   overflow-x: hidden;
   transition: min-width 0.2s ease;
-  min-width: 3.5em !important;
+  min-width: 45px !important;
 }
 
 #sidebar-box[sidebarcommand="viewHistorySidebar"],
@@ -29,13 +29,13 @@
   margin-top: 0;
 }
 
-#sidebar-header {
+/*#sidebar-header {
   position: relative;
   z-index: 1;
   background: #FEFEFE;
   border-right: 1px solid #EAEAEA;
   transition: margin 0.2s ease;
-}
+}*/
 #sidebar {
   /* Hides tab center header (search bar) */
   margin-top: -37px;
@@ -74,39 +74,73 @@ browser.webextension-devtoolsPanel-browser div {
   padding-left: 1px !important;
 }
 
+#urlbar:not(:focus) {
+  background-color: #FFFFFF33 !important;
+  border: none !important;
+  color: white !important;
+}
+#identity-box {
+  background-color: #FFFFFF22 !important;
+  padding: 0 5px 0 10px !important;
+  border: none !important;
+  box-shadow: 1px 0 5px 3px #FFFFFF22;
+  filter: saturate(50%) brightness(150%);
+}
+#identity-icon-labels {
+  filter: saturate(0) brightness(25%);
+}
 
-/* Extra Addon CSS */
-/*#tablist.shrinked .tab-meta-image {
-  background: white !important;
-  border-radius: 20%;
-  padding: 2px;
-  height: 32px;
-  width: 32px;
-  margin: 1px 5px;
+#global-toolbar.container {
+  background-color: transparent;
+  background: none;
+  box-shadow: 0 2px 2px 0 black;
+  font-size: 1.2em !important;
+  flex-wrap: wrap;
 }
-#tablist.shrinked .tab-meta-image .tab-icon {
-  height: 28px;
-  width: 28px;
-  image-rendering: unset;
-}
-#tablist {
-  margin-top: 5px;
-}
-.tab {
-  margin-top: 5px;
-}
-.tab-title-wrapper::after,
-.tab:not(.pinned) > .tab-close {
-  display: none;
-}
-ul.contextmenu {
-  position: fixed !important;
-  left: 0 !important;
+
+#global-toolbar > .title {
   width: 100%;
+  border: none;
+  text-align: center;
 }
-ul.contextmenu > li {
-  padding: 4px 1px !important;
+
+#global-toolbar > :not(:first-child) {
+  color: #343a3f;
+  font-size: 1.05em;
+  background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);
+  background-blend-mode: screen;
 }
-ul.contextmenu > :not(li) {
+
+#global-toolbar > :nth-child(2),
+#global-toolbar > :nth-child(3) {
+  flex-grow: 3;
+}
+
+#global-toolbar > button:after {
+  filter: invert(1);
+}
+
+.browserContainer {
+  background-color: #2b2b2b !important;
+}
+#sidebar-splitter {
+  border: none !important;
+  background-color: #2A2A2E !important;
+  margin-left: -4px;
+  z-index: 1;
+  position: relative;
+}
+
+#sidebar-header {
   display: none;
-}*/
+}
+
+.tab:not(.active)[data-identity-color] .tab-context {
+  background-position: -14px 0px;
+  z-index: 0;
+  transition: z-index 0s 150ms, background-position 150ms ease-out;
+}
+
+.tab-meta-image {
+  z-index: 1;
+}

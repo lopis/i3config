@@ -23,9 +23,11 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec xterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym Ctrl+q exec ~/noctrlq.sh
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -167,30 +169,33 @@ bindsym $mod+shift+e exec i3-input -P 'emojify:' -F "exec emojify :%s: | tr -d '
 #emojify ":bee:" | awk '{$1=$1};1' | xclip -selection clipboard
 
 # Colors
-# class                 border  backgr. text    indicator child_border
-client.focused          #001624 #001624 #6d8594 #001624   #285577
-client.focused_inactive #252a2d #252a2d #6d8594 #484e50   #24272d
-client.unfocused        #252a2d #252a2d #6d8594 #292d2e   #24272d
-client.urgent           #9f9f00 #9f9f00 #6d8594 #900000   #900000
-client.placeholder      #000000 #0c0c0c #6d8594 #000000   #0c0c0c
+# class                 border    backgr.   text    indicator child_border
+client.focused          #1b1a1a   #1b1a1a   #939393 #939393   #1b1a1a
+client.focused_inactive #1b1a1a   #1b1a1a   #939393 #484e50   #bdbdbd
+client.unfocused        #252a2d   #252a2d   #939393 #292d2e   #bdbdbd
+client.urgent           #9f9f00   #9f9f00   #939393 #900000   #900000
+client.placeholder      #000000   #0c0c0c   #939393 #000000   #0c0c0c
 
-client.background       #ffffff
+client.background       #252a2d
 
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
+  height 35
+  #i3bar_command i3bar
 	colors {
 		background         #252a2d
-		statusline         #6d8594
-		separator          #6d8594
+		statusline         #c8c8c8
+		separator          #c8c8c8
 
-		# Type             border  backg.  font
-		focused_workspace  #001624 #001624 #6d8594
-		active_workspace   #252a2d #252a2d #6d8594
-		inactive_workspace #252a2d #252a2d #6d8594
-		urgent_workspace   #650505 #650505 #6d8594
+		# Type             border    backg.    font
+		focused_workspace  #1b1a1a   #1b1a1a   #c8c8c8
+		active_workspace   #252a2d   #252a2d   #c8c8c8
+		inactive_workspace #252a2d   #252a2d   #c8c8c8
+		urgent_workspace   #650505   #650505   #c8c8c8
 	}
   font                 pango: Ubuntu Bold 12
   tray_output          primary
+  tray_padding         8
 	position             top
   status_command       i3blocks -c ~/.config/i3/i3blocks.conf
 	#status_command       i3status -c ~/.config/i3/i3status.conf
@@ -211,8 +216,7 @@ bindsym $mod+c exec "gnome-calculator"
 bindsym $mod+p exec 'xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440'
 bindsym $mod+Shift+p exec 'xrandr --output eDP1 --auto --pos 0x0 --output DP1 --off'
 
-# Startup Network Manager applet
-exec --no-startup-id nm-applet
+
 
 # Fullscreen window to floating
 bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
@@ -283,22 +287,60 @@ bindsym $mod+Ctrl+0 exec rm -rf /tmp/termdown.tmp && xterm -e termdown -c 10 --n
 ## Workspace specific settings
 # Assign Workspaces:
 for_window [class="Firefox"] move to workspace $ws1
+for_window [class="Firefox" window_role="Organizer"] floating enable resize set 900 650
 for_window [title="Popup"] floating enable
-for_window [title="termdown"] floating enable move to workspace timer
+for_window [instance="xterm" title="termdown"] floating enable
+for_window [instance="xterm" title="termdown"] resize set 900 650
+for_window [instance="xterm" title="termdown"] move to workspace timer
 for_window [class="Atom"] move to workspace $ws2
-for_window [class="HipChat"] move to workspace $ws3
+for_window [class="Slack"] move to workspace $ws3
 for_window [class="Telegram"] move to workspace $ws3
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Blueman-manager"] floating enable
 
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="pop-up"] border pixel 1
+for_window [window_role="task_dialog"] border pixel 1
+
+for_window [class="gdebi*"] floating enable resize set 900 650
+for_window [title="Package Installer"] floating enable resize set 900 650
+for_window [class="File-roller"] floating enable resize set 900 650
+
+#####################
+### i3-gaps stuff ###
+
+# Necessary for i3-gaps to work properly (pixel can be any value)
+for_window [class="^.*"] border pixel 0
+
+# Smart Gaps
+# smart_gaps on
+
+# Smart Borders
+# smart_borders on
+
+# Set inner/outer gaps
+gaps inner 8
+gaps outer 0
+
+#####################
+####### LAUNCH ######
+
+# Startup Network Manager applet
+exec --no-startup-id nm-applet
 # Startup apps
-exec --no-startup-id firefox-trunk
+exec --no-startup-id firefox
 exec --no-startup-id atom
-exec --no-startup-id hipchat4
+exec --no-startup-id slack
 exec --no-startup-id telegram
+
+# Set wallpaper
+#exec --no-startup-id "feh --bg-scale ~/Pictures/Wallpapers/*"
 
 # Switch to workspace 1 at startup
 exec --no-startup-id i3-msg workspace $ws1
 
-# for_window [class="gdebi*"] floating enable
-
-# Autostart compositor
-exec --no-startup-id compton -b
+# RELOAD
+exec_always --no-startup-id compton
+exec_always --no-startup-id "hsetroot -add '#fc6b41' -add '#830532' -gradient 0"
+#exec_always --no-startup-id "hsetroot -add '#9a2e7e' -add '#031d50' -gradient 0"

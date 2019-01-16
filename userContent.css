@@ -44,3 +44,73 @@ body.certerror {
 #returnButton {
   display: none;
 }
+
+
+/* Responsive design mode */
+/*#viewports {
+  flex-grow: 1;
+}
+.viewport {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+}
+.viewport-dimension {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+.viewport-dimension-input {
+  font-size: 14px;
+}
+.resizable-viewport {
+  border: 15px solid var(--theme-toolbar-background) !important;
+  border-radius: 25px;
+  position: static
+}
+.viewport-content {
+  border-radius: 15px;
+  overflow: hidden;
+}
+.resizable-viewport .browser {
+  transform: translateZ(0px);
+}
+
+.viewport-toolbar,
+#global-toolbar .toolbar-dropdown {
+  height: unset !important;
+  border: 1px solid var(--theme-splitter-color) !important;
+  box-shadow: var(--rdm-box-shadow);
+}
+.toolbar-dropdown {
+  padding: 3px;
+  margin: 2px;
+}
+.viewport-toolbar {
+  margin-top: -30px;
+  font-size: 14px;
+  position: fixed;
+  top: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-right: 50px;
+}
+.viewport-rotate-button {
+  padding: 5px;
+}
+.devtools-toolbarbutton:not([label]) > .toolbarbutton-icon,
+.devtools-button:empty::before {
+  width: 25px;
+  height: 25px;
+  margin: 2px 6px;
+}
+.viewport-resize-handle {
+  opacity: 0.7;
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+  bottom: -13px;
+  right: -14px;
+}*/

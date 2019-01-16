@@ -11,6 +11,7 @@ spacefm (file manager)
 xdotool (for youtube floaty)
 termdown (for counter)
 xterm (for counter)
+wallpaper
 ```
 
 ### Extra setup

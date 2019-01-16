@@ -1,12 +1,19 @@
+body{
+  background-color: #2A2A2E;
+  margin-top: 30px;
+}
+#topmenu {
+  display: none;
+}
 #tablist-wrapper.shrinked #pinnedtablist .tab-meta-image,
 #tablist-wrapper.shrinked #tablist .tab-meta-image {
-  background: white !important;
-  border-radius: 20%;
-  padding: 2px;
-  height: 32px;
-  width: 32px;
-  min-width: 32px;
-  margin: 1px 5px;
+  background: #eee !important;
+  border-radius: 50%;
+  padding: 4px;
+  height: 36px;
+  width: 36px;
+  min-width: 36px;
+  margin: 6px 3px;
 }
 #tablist-wrapper.shrinked #pinnedtablist .tab-icon-wrapper,
 #tablist-wrapper.shrinked #tablist .tab-icon-wrapper {
@@ -24,7 +31,6 @@
   height: 100%;
   width: 100%;
   image-rendering: unset;
-  margin: 0;
 }
 #tablist-wrapper.shrinked #tablist .tab.loading .tab-meta-image {
   background: #ffffff1a !important;
@@ -42,7 +48,7 @@
   margin-top: 5px;
 }
 .tab {
-  margin-top: 5px;
+  margin-top: 12px;
 }
 .tab-title-wrapper::after,
 .tab:not(.pinned) > .tab-close {
@@ -68,4 +74,22 @@ ul.contextmenu > :not(li) {
   bottom: 10px;
   position: absolute;
   background-color: white;
+}
+.tab-context {
+  min-width: 18px;
+  margin-right: -14px;
+}
+.tab:not(.hasContext):not(.active) > .tab-context {
+  background-position: -18px 0;
+}
+.tab-meta-image {
+  box-shadow: rgb(42, 42, 46) 0px 0px 0px 5px;
+  background-color: rgb(42, 42, 46) !important;
+}
+#tablist-wrapper.shrinked #tablist .tab.loading .tab-meta-image {
+  background: white !important;
+}
+.sidebar-splitter {
+  background-color: rgb(42, 42, 46);
+  border: 1px rgb(42, 42, 46);
 }
