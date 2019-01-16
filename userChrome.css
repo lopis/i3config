@@ -1,146 +1,87 @@
-/*
- * To use this file, run:
- * ln ./.config/i3/userChrome.css .mozilla/<profilepath>/chrome/userChrome.css
- */
-/* Hides the tab strip when the menu bar is hidden */
-#toolbar-menubar[inactive="true"] + #TabsToolbar {
-  visibility: collapse !important;
+#browser {
+  padding-left: 50px;
 }
 
-#sidebar-box,
-#sidebar-box #sidebar-header {
-  overflow-x: hidden;
-  transition: min-width 0.2s ease;
-  min-width: 45px !important;
+#TabsToolbar {
+  width: 50px !important;
+  max-width: 50px;
+  position: fixed;
+  height: calc(100vh - 32px);
+  z-index: 10;
+  top: 33px;
+  background: #24292e;
+  box-shadow: 0 0 5px 0 #24292e;
 }
 
-#sidebar-box[sidebarcommand="viewHistorySidebar"],
-#sidebar-box[sidebarcommand="viewHistorySidebar"] #sidebar-header,
-#sidebar-box[sidebarcommand="viewTabsSidebar"],
-#sidebar-box[sidebarcommand="viewTabsSidebar"] #sidebar-header,
-#sidebar-box[sidebarcommand="viewBookmarksSidebar"],
-#sidebar-box[sidebarcommand="viewBookmarksSidebar"] #sidebar-header {
-  min-width: 300px !important;
+.scrollbutton-up,
+.scrollbutton-down,
+#new-tab-button {
+  display: none;
 }
 
-#sidebar-box[sidebarcommand="viewHistorySidebar"] #sidebar,
-#sidebar-box[sidebarcommand="viewHistorySidebar"] #sidebar,
-#sidebar-box[sidebarcommand="viewTabsSidebar"] #sidebar {
-  margin-top: 0;
+#toolbar-menubar[inactive="true"] {
+
+  min-height: 100px !important;
+}
+#toolbar-menubar:not([inactive="true"]) + #TabsToolbar {
+  height: calc(100vh - 32px - 26px);
+  top: calc(33px + 27px);
 }
 
-/*#sidebar-header {
+.tabbrowser-arrowscrollbox,
+.tabbrowser-arrowscrollbox .box-inherit.scrollbox-innerbox {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 50px;
+}
+
+.tab-stack {
+  height: 100%;
+}
+
+.tab-bottom-line {
+  background: none !important;
+}
+
+--tab-size: 40px;
+.tab-content {
+  background: white;
+  border-radius: 50%;
+  width: var(--tab-size);
+  height: var(--tab-size);
+  margin: 5px;
+  overflow: hidden;
+  border: 2px solid white;
+  line-height: 1;
+  box-sizing: border-box;
+  transition: all 200ms;
   position: relative;
-  z-index: 1;
-  background: #FEFEFE;
-  border-right: 1px solid #EAEAEA;
-  transition: margin 0.2s ease;
-}*/
-#sidebar {
-  /* Hides tab center header (search bar) */
-  margin-top: -37px;
-  position: relative;
-  z-index: 0;
-  margin-left: -2px;
+  padding: 7px;
 }
 
-#sidebar-throbber {
-  display: none;
+.tabbrowser-tab {
+  transition-property: opacity;  
 }
 
-#newtab-label, #newtab  {
-  display: none !important;
+.tabbrowser-tab[data-identity-color] .tab-background {
+  border-bottom: 2px solid var(--identity-tab-color);
 }
 
-#settings {
-  display: none !important;
+.tab-background {
+  transform: rotate(-90deg);
 }
 
-/* Hides sidebar switcher text */
-#sidebar-title, #sidebar-switcher-arrow {
-  display: none;
+.tab-icon-image {
+  height: 22px;
+  width: 22px;
+  margin: 0;
 }
 
-#sidebar-switcher-arrow {
-  margin-left: -14px;
-}
-
-/* Hides sidebar close button */
-#sidebar-close {
-  display: none;
-}
-
-browser.webextension-devtoolsPanel-browser div {
-  padding-left: 1px !important;
-}
-
-#urlbar:not(:focus) {
-  background-color: #FFFFFF33 !important;
-  border: none !important;
-  color: white !important;
-}
-#identity-box {
-  background-color: #FFFFFF22 !important;
-  padding: 0 5px 0 10px !important;
-  border: none !important;
-  box-shadow: 1px 0 5px 3px #FFFFFF22;
-  filter: saturate(50%) brightness(150%);
-}
-#identity-icon-labels {
-  filter: saturate(0) brightness(25%);
-}
-
-#global-toolbar.container {
-  background-color: transparent;
-  background: none;
-  box-shadow: 0 2px 2px 0 black;
-  font-size: 1.2em !important;
-  flex-wrap: wrap;
-}
-
-#global-toolbar > .title {
+#alltabs-button, .tabs-newtab-button {
+  height: var(--tab-size) !important;
   width: 100%;
-  border: none;
-  text-align: center;
-}
-
-#global-toolbar > :not(:first-child) {
-  color: #343a3f;
-  font-size: 1.05em;
-  background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);
-  background-blend-mode: screen;
-}
-
-#global-toolbar > :nth-child(2),
-#global-toolbar > :nth-child(3) {
-  flex-grow: 3;
-}
-
-#global-toolbar > button:after {
-  filter: invert(1);
-}
-
-.browserContainer {
-  background-color: #2b2b2b !important;
-}
-#sidebar-splitter {
-  border: none !important;
-  background-color: #2A2A2E !important;
-  margin-left: -4px;
-  z-index: 1;
-  position: relative;
-}
-
-#sidebar-header {
-  display: none;
-}
-
-.tab:not(.active)[data-identity-color] .tab-context {
-  background-position: -14px 0px;
-  z-index: 0;
-  transition: z-index 0s 150ms, background-position 150ms ease-out;
-}
-
-.tab-meta-image {
-  z-index: 1;
+  padding: 0 !important;
+  padding-top: 10px !important;
+  visibility: visible !important;
 }
