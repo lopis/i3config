@@ -7,14 +7,14 @@ myi3config
 scrot
 xclip
 telegram
-spacefm (file manager)
-xdotool (for youtube floaty)
-termdown (for counter)
-xterm (for counter)
-wallpaper
+light (git@github.com:haikarainen/light.git)
+playerctl (for media controls)
+i3gaps
 ```
 
 ### Extra setup
+
+* Clone this repo into ~/.config/i3, or link it
 
 * Make Telegram executable from the Terminal: `sudo ln -s /opt/telegram/telegram /usr/local/bin/telegram`
 

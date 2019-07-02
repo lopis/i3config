@@ -1,17 +1,15 @@
 #!/bin/bash
 
 # Sets monitor names
-IFS=" " read INTERNAL con < <(xrandr|grep " connected primary")
-IFS=" " read EXTERNAL con < <(xrandr|awk  "/ connected/ && !/ primary/")
-INTERNAL_OUTPUT="eDP-1"
-EXTERNAL_OUTPUT="DP-1"
+IFS=" " read INTERNAL_OUTPUT con < <(xrandr|grep " connected primary")
+IFS=" " read EXTERNAL_OUTPUT con < <(xrandr | grep connected | grep -Ev 'disconnected|primary')
 echo internal monitor is $INTERNAL_OUTPUT
 echo external monitor is $EXTERNAL_OUTPUT
 
 # Position horizontal x vertical
 INTERNAL_POS="0x0"
 EXTERNAL_POS="-320x-1440"
-# xrandr --output $EXTERNAL_OUTPUT --auto --pos $EXTERNAL_POS --output $INTERNAL_OUTPUT --auto --pos $INTERNAL_POS
+xrandr --output $EXTERNAL_OUTPUT --auto --pos $EXTERNAL_POS --output $INTERNAL_OUTPUT --auto --pos $INTERNAL_POS
 
 echo arg1 is $1
 

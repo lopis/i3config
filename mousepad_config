@@ -1,0 +1,7 @@
+touchpadid=`xinput list | grep Touchpad | grep -Po 'id=[0-9]+' | grep -o '[0-9]*'`
+propid=`xinput list-props $touchpadid | grep 'Tapping Enabled (' | grep -Po '\([0-9]+\)' | grep -o '[0-9]*'`
+
+
+# enable touchpad tapping
+xinput set-prop $touchpadid $propid 1
+
