@@ -10,6 +10,7 @@ telegram
 light (git@github.com:haikarainen/light.git)
 playerctl (for media controls)
 i3gaps
+blueman
 ```
 
 ### Extra setup
@@ -20,9 +21,8 @@ i3gaps
 
 * Change theme in `lxappearance` `gtk-chtheme` and `qt4-qtconfig`
 
-* Setup the gnome keyring: https://wiki.archlinux.org/index.php/GNOME/Keyring
-
 ### Current issues
 
-* no keyring
 * not saving/restoring workspace layouts
+
+* `light` doesn't work unless I run `sudo chown me /sys/class/backlight/intel_backlight/brightness`
