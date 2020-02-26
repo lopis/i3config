@@ -1,14 +1,43 @@
 #!/bin/bash
 
 # Sets monitor names
-IFS=" " read INTERNAL_OUTPUT con < <(xrandr|grep " connected primary")
-IFS=" " read EXTERNAL_OUTPUT con < <(xrandr | grep connected | grep -Ev 'disconnected|primary')
-echo internal monitor is $INTERNAL_OUTPUT
-echo external monitor is $EXTERNAL_OUTPUT
+RGX_NAME="([a-zA-Z0-9-]*) .*"
+RGX_RES="([0-9]+)x([0-9]+)"
+
+PRIMARY=$(xrandr|grep ' connected primary')
+SECONDARY=$(xrandr | grep connected | grep -Ev 'disconnected|primary')
+
+if [[ $PRIMARY =~ $RGX_NAME ]]
+then
+  INTERNAL_OUTPUT="${BASH_REMATCH[1]}"
+  echo internal monitor is $INTERNAL_OUTPUT
+fi
+
+if [[ $SECONDARY =~ $RGX_NAME ]]
+then
+  EXTERNAL_OUTPUT="${BASH_REMATCH[1]}"
+  echo external monitor is $EXTERNAL_OUTPUT
+fi
+
+if [[ $PRIMARY =~ $RGX_RES ]]
+then
+  INTERNAL_WIDTH="${BASH_REMATCH[1]}"
+  INTERNAL_HEIGHT="${BASH_REMATCH[2]}"
+  echo internal monitor is $INTERNAL_WIDTH x $INTERNAL_HEIGHT
+else
+  echo No match
+fi
+
+if [[ $SECONDARY =~ $RGX_RES ]]
+then
+  EXTERNAL_WIDTH="${BASH_REMATCH[1]}"
+  EXTERNAL_HEIGHT="${BASH_REMATCH[2]}"
+  echo external monitor is $EXTERNAL_WIDTH x $EXTERNAL_HEIGHT
+fi
 
 # Position horizontal x vertical
-INTERNAL_POS="0x0"
-EXTERNAL_POS="-320x-1440"
+EXTERNAL_POS="0x0"
+INTERNAL_POS="0x${EXTERNAL_HEIGHT}"
 xrandr --output $EXTERNAL_OUTPUT --auto --pos $EXTERNAL_POS --output $INTERNAL_OUTPUT --auto --pos $INTERNAL_POS
 
 echo arg1 is $1
