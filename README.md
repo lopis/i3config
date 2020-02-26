@@ -4,22 +4,31 @@ myi3config
 ### Dependencies
 
 ```
+i3gaps 
+    # sudo add-apt-repository ppa:kgilmer/speed-ricer
+    # sudo apt install i3-gaps
+i3blocks
 scrot
 xclip
 telegram
 light (git@github.com:haikarainen/light.git)
 playerctl (for media controls)
-i3gaps
 blueman
+feh (for backgrounds)
 ```
 
 ### Extra setup
 
 * Clone this repo into ~/.config/i3, or link it
 
-* Make Telegram executable from the Terminal: `sudo ln -s /opt/telegram/telegram /usr/local/bin/telegram`
-
 * Change theme in `lxappearance` `gtk-chtheme` and `qt4-qtconfig`
+
+* Enable natural scrolling
+    
+Edit the file `/usr/share/X11/xorg.conf.d/40-libinput.conf` and add the following line to the sections "pointer" and "touchpad":
+
+    Option "NaturalScrolling" "on"
+    
 
 ### Current issues
 
