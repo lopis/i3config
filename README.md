@@ -14,6 +14,7 @@ telegram
 light (git@github.com:haikarainen/light.git)
 playerctl (for media controls)
 blueman
+galculator
 feh (for backgrounds)
 ```
 
@@ -25,9 +26,10 @@ feh (for backgrounds)
 
 * Enable natural scrolling
     
-Edit the file `/usr/share/X11/xorg.conf.d/40-libinput.conf` and add the following line to the sections "pointer" and "touchpad":
+Edit the file `/usr/share/X11/xorg.conf.d/40-libinput.conf` and add the following lines to the "touchpad" section (and optionally the "pointer" section too):
 
     Option "NaturalScrolling" "on"
+    
     
 
 ### Current issues

@@ -195,7 +195,6 @@ bar {
 		urgent_workspace   #650505   #650505   #c8c8c8
 	}
   font                 pango: Ubuntu Bold 12
-  tray_output          primary
   tray_padding         8
 	position             top
   status_command       i3blocks -c $i3path/i3blocks.conf
@@ -209,7 +208,7 @@ hide_edge_borders both
 #xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440
 
 # launch Calculator
-bindsym $mod+c exec "gnome-calculator"
+bindsym $mod+c exec "galculator"
 
 #_vga=$( xrandr  | sed -n 's/^\(VGA.\).*/\1/pg')
 #alias laptop='xrandr --output LVDS1 --auto --output $_vga --off'
@@ -246,11 +245,14 @@ bindsym $mod+XF86AudioMute exec "$spotifyCmd org.mpris.MediaPlayer2.Player.PlayP
 bindsym $mod+XF86AudioRaiseVolume exec "$spotifyCmd org.mpris.MediaPlayer2.Player.Next"
 bindsym $mod+XF86AudioLowerVolume exec "$spotifyCmd org.mpris.MediaPlayer2.Player.Previous"
 
-# Sreen brightness controlsS
-bindsym XF86MonBrightnessUp exec light -A -b 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U -b 20 # decrease screen brightness
-bindsym Ctrl+XF86MonBrightnessUp exec light -A -b 2 # increase screen brightness
-bindsym Ctrl+XF86MonBrightnessDown exec light -U -b 2 # decrease screen brightness
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec light -A 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 20 # decrease screen brightness
+bindsym Ctrl+XF86MonBrightnessUp exec light -A 2 # increase screen brightness
+bindsym Ctrl+XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
+# External monitor brightness controls
+bindsym Shift+XF86MonBrightnessUp exec xrandr --output DP-1 --brightness 1
+bindsym Shift+XF86MonBrightnessDown exec xrandr --output DP-1 --brightness 1
 
 #Enable natural scrolling
 exec --no-startup-id synclient HorizEdgeScroll=0 VertEdgeScroll=0 HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertScrollDelta=-90 HorizScrollDelta=-90
@@ -276,7 +278,7 @@ mode "$mode_monitors" {
     bindsym m exec --no-startup-id $i3path/monitors.sh mirror || notify-send "monitors.sh not found", mode "default"
     bindsym c exec --no-startup-id $i3path/monitors.sh || notify-send "monitors.sh not found", mode "default"
 
-    # back to normal: Enter or Escape
+    # back to normal: Entelight -A -b 20r or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -316,7 +318,7 @@ for_window [window_role="task_dialog"] border pixel 1
 for_window [class="gdebi*"] floating enable resize set 900 650
 for_window [title="Package Installer"] floating enable resize set 900 650
 for_window [class="File-roller"] floating enable resize set 900 650
-for_window [class="Calculator"] floating enable resize set 900 650
+for_window [class="Galculator"] floating enable
 
 #####################
 ### i3-gaps stuff ###
