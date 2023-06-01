@@ -1,13 +1,14 @@
 # i3config
+
 myi3config
 
 ### Dependencies
 
 ```
-i3gaps 
-    # sudo add-apt-repository ppa:kgilmer/speed-ricer
-    # sudo apt install i3-gaps
+fonts-font-awesome
 i3blocks
+    # You'll need to get i3blocks-contrib to get all scripts in ~/.config/i3blocks
+    # You'll need i3blocks 1.5 or higher to get dynamic props working
 scrot
 xclip
 telegram
@@ -15,7 +16,11 @@ light (git@github.com:haikarainen/light.git)
 playerctl (for media controls)
 blueman
 galculator
-feh (for backgrounds)
+hsetroot (for background)
+picom
+lm-sensors
+yad # for calendar 
+    # for i3blocks temperature
 ```
 
 ### Extra setup
@@ -24,13 +29,12 @@ feh (for backgrounds)
 
 * Change theme in `lxappearance` `gtk-chtheme` and `qt4-qtconfig`
 
-* Enable natural scrolling
-    
-Edit the file `/usr/share/X11/xorg.conf.d/40-libinput.conf` and add the following lines to the "touchpad" section (and optionally the "pointer" section too):
+* Enable natural scrolling, tap-to-click, and 2- and 3-finger taps
+
+Edit the file `/usr/share/X11/xorg.conf.d/40-libinput.conf` and add the following lines to the "touchpad" section:
 
     Option "NaturalScrolling" "on"
-    
-    
+    Option "Tapping" "on"  
 
 ### Current issues
 

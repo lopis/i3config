@@ -25,7 +25,7 @@ then
   INTERNAL_HEIGHT="${BASH_REMATCH[2]}"
   echo internal monitor is $INTERNAL_WIDTH x $INTERNAL_HEIGHT
 else
-  echo No match
+  echo No match internal
 fi
 
 if [[ $SECONDARY =~ $RGX_RES ]]
@@ -33,6 +33,8 @@ then
   EXTERNAL_WIDTH="${BASH_REMATCH[1]}"
   EXTERNAL_HEIGHT="${BASH_REMATCH[2]}"
   echo external monitor is $EXTERNAL_WIDTH x $EXTERNAL_HEIGHT
+else
+  echo No match external
 fi
 
 # Position horizontal x vertical
@@ -41,6 +43,12 @@ INTERNAL_POS="0x${EXTERNAL_HEIGHT}"
 xrandr --output $EXTERNAL_OUTPUT --auto --pos $EXTERNAL_POS --output $INTERNAL_OUTPUT --auto --pos $INTERNAL_POS
 
 echo arg1 is $1
+
+if [ "$SECONDARY" = "" ]; then
+  monitor_mode="internal"
+elif [ "$PRIMARY" = "" ]; then
+  monitor_mode="external"
+fi
 
 # read mode from argument
 if [ ! -z "$1" ] ; then
@@ -57,6 +65,8 @@ fi
 
 echo monitor mode is $monitor_mode
 
+# EXTERNAL_OUTPUT="DP-1"
+# INTERNAL_OUTPUT="eDP-1"
 
 # Set screen mode
 if [ $monitor_mode = "external" ]; then
@@ -74,3 +84,4 @@ elif [ $monitor_mode = "all" ]; then
 fi
 
 echo "${monitor_mode}" > /tmp/monitor_mode.dat
+nm-applet&

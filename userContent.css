@@ -1,116 +1,56 @@
-/*
- * To use this file, run:
- * ln ./.config/i3/userContent.css .mozilla/<profilepath>/chrome/userContent.css
- */
+@-moz-document
+url-prefix("chrome://devtools/content"),
+url-prefix("about:devtools-toolbox") {
+  .theme-body,
+  .devtools-tabbar,
+  .inspector-responsive-container {
+    --dark: #151A2D;
+    --medium: #252A3D;
+    --light: #2d3349; 
+    --lighter: #3a415a;
+    --theme-toolbar-hover: var(--medium) !important;
+    --theme-body-background: var(--medium) !important;
+    --theme-tab-toolbar-background: var(--dark) !important;
+    --theme-body-background: var(--dark) !important;
+    --theme-sidebar-background: var(--dark) !important;
+    --console-input-background: var(--medium) !important;
+    --rule-header-background-color: var(--dark) !important;
+    --theme-splitter-color: var(--light) !important;
+    --theme-emphasized-splitter-color: var(--light) !important;
+    --theme-emphasized-splitter-color-hover: var(--lighter) !important
+  }
+  .devtools-tab {
+    margin-right: 2px !important;
+    margin-right: 2px !important;
+    margin-top: 2px !important;
+    border-radius: 3px 3px 0 0 !important;
+  }
+  .devtools-tab.selected {
+      background: var(--theme-toolbar-hover) !important;
+  }
+  .devtools-tab-line {
+    display: none !important;
+  }
+  .devtools-tabbar {
+    border: none !important;
+  }
 
-#certErrorAndCaptivePortalButtonContainer {
-  margin-top: 0 !important;
-}
-#certErrorAndCaptivePortalButtonContainer #advancedButton {
-  flex-grow: 1 !important;
-  padding: 15px !important;
-}
+  .devtools-tab > img {
+    height: 12px !important;
+    width: 12px !important;
+    margin-inline: 5px 5px !important;
+    opacity: 0.6 !important;
+  }
 
-#badCertAdvancedPanel {
-  position: relative;
-}
+  .devtools-input-toolbar {
+    background: var(--theme-toolbar-hover) !important;
+  }
 
-#errorShortDesc,
-#certificateErrorReporting {
-  height: 0;
-  overflow: hidden;
-}
-
-.exceptionDialogButtonContainer {
-  position: absolute !important;
-  top: -103px !important;
-  padding: 0 !important;
-  width: 100% !important;
-  background: none !important;
-}
-
-#exceptionDialogButton {
-  padding: 15px !important;
-  width: 100% !important;
-  background: #eb614d !important;
-  color: white !important;
-  font-weight: bold !important;
-}
-
-body.certerror {
-  justify-content: flex-start !important;
-}
-
-#returnButton {
-  display: none;
-}
-
-
-/* Responsive design mode */
-/*#viewports {
-  flex-grow: 1;
-}
-.viewport {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 40px;
-}
-.viewport-dimension {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-}
-.viewport-dimension-input {
-  font-size: 14px;
-}
-.resizable-viewport {
-  border: 15px solid var(--theme-toolbar-background) !important;
-  border-radius: 25px;
-  position: static
-}
-.viewport-content {
-  border-radius: 15px;
-  overflow: hidden;
-}
-.resizable-viewport .browser {
-  transform: translateZ(0px);
+  html {
+    scrollbar-color: var(--medium) var(--dark) !important;
+  }
 }
 
-.viewport-toolbar,
-#global-toolbar .toolbar-dropdown {
-  height: unset !important;
-  border: 1px solid var(--theme-splitter-color) !important;
-  box-shadow: var(--rdm-box-shadow);
+.search-handoff-button {
+  background: #3F3351 var(--newtab-search-icon) 16px center no-repeat !important;
 }
-.toolbar-dropdown {
-  padding: 3px;
-  margin: 2px;
-}
-.viewport-toolbar {
-  margin-top: -30px;
-  font-size: 14px;
-  position: fixed;
-  top: 72px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding-right: 50px;
-}
-.viewport-rotate-button {
-  padding: 5px;
-}
-.devtools-toolbarbutton:not([label]) > .toolbarbutton-icon,
-.devtools-button:empty::before {
-  width: 25px;
-  height: 25px;
-  margin: 2px 6px;
-}
-.viewport-resize-handle {
-  opacity: 0.7;
-  padding: 8px;
-  width: 32px;
-  height: 32px;
-  bottom: -13px;
-  right: -14px;
-}*/

@@ -1,106 +1,110 @@
-#browser {
-  padding-left: 50px !important;
-}
-
-#TabsToolbar {
-  width: 50px !important;
-  max-width: 50px !important;
-  position: fixed !important;
-  height: calc(100vh - 32px) !important;
-  z-index: 10 !important;
-  top: 33px !important;
-  background: #24292e !important;
-  box-shadow: 0 0 5px 0 #24292e !important;
-  
-  --tab-size: 40px !important;
-}
-
-.scrollbutton-up,
-.scrollbutton-down,
-#new-tab-button {
+.titlebar-buttonbox-container,
+.titlebar-spacer {
   display: none !important;
 }
 
-#toolbar-menubar[inactive="true"] {
-
-  min-height: 100px !important;
-}
-#toolbar-menubar:not([inactive="true"]) + #TabsToolbar {
-  height: calc(100vh - 32px - 26px) !important;
-  top: calc(33px + 27px) !important;
+/* Hide "playing" */
+.tab-secondary-label {
+  display: none;
 }
 
-.tabbrowser-arrowscrollbox,
-.tabbrowser-arrowscrollbox .box-inherit.scrollbox-innerbox {
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
-  width: 50px !important;
+.tab-icon-overlay[soundplaying] {
+  opacity: 1 !important;
 }
 
-.tab-stack {
-  height: 100% !important;
-}
-
-.tab-bottom-line {
-  background: none !important;
-}
-
-
-.tab-content {
-  background: white !important;
-  border-radius: 50% !important;
-  width: var(--tab-size) !important;
-  height: var(--tab-size) !important;
-  margin: 5px !important;
-  overflow: hidden !important;
-  border: 2px solid white !important;
-  line-height: 1 !important;
-  box-sizing: border-box !important;
-  transition: all 200ms !important;
-  position: relative !important;
-  padding: 7px !important;
-}
-
-.tabbrowser-tab {
-  transition-property: opacity !important;
-  max-height: 50px;
-}
-
-.tabbrowser-tab:not([pinned]):not([fadein]) {
-  visibility: visible !important;;
-  max-width: var(--tab-size) !important;
-  min-width: var(--tab-size) !important;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 200ms ease, opacity 200ms ease !important;
-}
-
-.tabbrowser-tab[data-identity-color] .tab-background {
-  border-bottom: 2px solid var(--identity-tab-color) !important;
-}
-
-.tab-background {
-  transform: rotate(-90deg) !important;
+tab:not([pinned="true"]) .tab-icon-overlay[soundplaying] {
+  margin-left: 22px;
+  padding: 0px !important;
 }
 
 .tab-icon-image {
-  height: 22px !important;
-  width: 22px !important;
-  margin: 0 !important;
+  opacity: 1 !important;
 }
 
-#alltabs-button, .tabs-newtab-button {
-  height: var(--tab-size) !important;
-  width: 100% !important;
-  padding: 0 !important;
-  padding-top: 10px !important;
-  visibility: visible !important;
+tab {
+  --tab-min-height: 35px;
 }
 
-.tab-icon-sound {
-  background: #474747;
-  border-radius: 50%;
-  padding: 1px !important;
-  transform: translate(-12px,7px);
+.tab-background {
+  margin-bottom: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  opacity: 0.8 !important;
+}
+
+tab[selected=true] .tab-background {
+  background: var(--toolbar-bgcolor) !important;
+  opacity: 1 !important;
+}
+
+#urlbar:not([open]) #urlbar-background {
+  display: none !important;
+}
+
+.urlbar-icon {
+  opacity: 0.6;
+}
+
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+  margin: -5px 6px 0 !important;
+  filter: brightness(1) contrast(1) !important;
+  border-radius: 0 !important;
+  height: 0px !important;
+  border: 3px solid var(--identity-icon-color);
+  border-width: 5px 4px 2px 4px;
+  max-width: 0px;
+  border-color: var(--identity-icon-color) var(--identity-icon-color) transparent var(--identity-icon-color);
+  background: transparent !important;
+}
+
+.tab-content {
+	--attention-icon-color: #6698b6;
+  background-position: center bottom calc(3px + var(--tabs-navbar-shadow-size)) !important;
+}
+
+.tabbrowser-tab:not([pinned])[first-visible-tab="true"][last-visible-tab="true"] {
+	max-width: 500px;
+}
+
+.tab-background {
+	position: relative;
+  top: 1px !important;
+}
+.tab-background[selected=true]::before,
+.tab-background[selected=true]::after {
+	content: "";
+	display: inline-block;
+	background: radial-gradient(at left top, transparent 0%, transparent 69%, var(--toolbar-bgcolor) 74%);
+	height: 10px;
+	width: 10px;
+	position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(-9px, 0);
+}
+.tab-background[selected=true]::after {
+	background: radial-gradient(at right top, transparent 0%, transparent 69%, var(--toolbar-bgcolor) 74%);
+  right: 0;
+  left: unset;
+  transform: translate(9px, 0);
+}
+
+html {
+  scrollbar-color: #252A3D #151A2D !important;
+}
+
+
+/* gaps */
+#browser {
+  padding-top: 2px;
+}
+
+#appcontent,
+#navigator-toolbox-background {
+  /* border-radius: 7px !important; */
+  /* overflow: hidden !important; */
+}
+
+#main-window {
+  background: linear-gradient(155deg, #A54C5F, #B81352) !important;
 }
