@@ -1,3 +1,7 @@
+:root {
+  font-family: Lato !important;
+}
+
 .titlebar-buttonbox-container,
 .titlebar-spacer {
   display: none !important;
@@ -95,9 +99,9 @@ html {
 
 
 /* gaps */
-#browser {
+/* #browser {
   padding-top: 2px;
-}
+} */
 
 #appcontent,
 #navigator-toolbox-background {
@@ -105,6 +109,8 @@ html {
   /* overflow: hidden !important; */
 }
 
-#main-window {
+/* #main-window {
   background: linear-gradient(155deg, #A54C5F, #B81352) !important;
-}
+} */
+
+

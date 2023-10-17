@@ -17,7 +17,7 @@
     #
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
-    follow = none
+    follow = mouse
 
     ### Geometry ###
 
@@ -25,18 +25,18 @@
     # geometry = "400x5-30+20"
 
     # dynamic width from 0 to 300
-    width = (400, 500)
+    width = (400, 1000)
     # constant width of 300
     # width = 400
 
     # The maximum height of a single notification, excluding the frame.
-    height = 200
+    height = 128
 
     # Position the notification in the top right corner
-    origin = top-right
+    origin = top-center
 
     # Offset from the origin
-    offset = 10x45
+    offset = 4x4
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -67,7 +67,7 @@
     progress_bar_corner_radius = 0
 
     # Corner radius for the icon image.
-    icon_corner_radius = 0
+    icon_corner_radius = 2
 
     # Show how many messages are currently hidden (because of
     # notification_limit).
@@ -76,29 +76,22 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 20
+    transparency = 0
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
     # If gap_size is greater than 0, this setting will be ignored.
-    separator_height = 2
+    separator_height = 1
 
     # Padding between text and separator.
-    padding = 16
+    padding = 4
 
     # Horizontal padding.
-    horizontal_padding = 16
+    horizontal_padding = 4
 
     # Padding between text and icon.
-    text_icon_padding = 0
-
-    # Defines width in pixels of frame around the notification window.
-    # Set to 0 to disable.
-    frame_width = 4
-
-    # Defines color of the frame around the notification window.
-    frame_color = "#E9A6A6"
+    text_icon_padding = 12
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
@@ -106,13 +99,10 @@
     # Click events on gaps do not currently propagate to applications below.
     gap_size = 0
 
-    # Define a color for the separator.
-    # possible values are:
-    #  * auto: dunst tries to find a color fitting to the background;
-    #  * foreground: use the same color as the foreground;
-    #  * frame: use the same color as the frame;
-    #  * anything else will be interpreted as a X color.
-    separator_color = "#ED889A"
+    # Defines width in pixels of frame around the notification window.
+    # Set to 0 to disable.
+    frame_width = 4
+
 
     # Sort messages by urgency.
     sort = yes
@@ -126,7 +116,7 @@
 
     ### Text ###
 
-    font = Ubuntu 12
+    font = Saira Semi Condensed 10
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -170,7 +160,7 @@
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
-    alignment = left
+    alignment = center
 
     # Vertical alignment of message text and icon.
     # Possible values are "top", "center" and "bottom".
@@ -183,12 +173,12 @@
 
     # Specify where to make an ellipsis in long lines.
     # Possible values are "start", "middle" and "end".
-    ellipsize = middle
+    ellipsize = end
 
     word_wrap = true
 
     # Ignore newlines '\n' in notifications.
-    ignore_newline = no
+    ignore_newline = yes
 
     # Stack together notifications with the same content
     stack_duplicates = true
@@ -203,10 +193,10 @@
 
     # Recursive icon lookup. You can set a single theme, instead of having to
     # define all lookup paths.
-    enable_recursive_icon_lookup = true
+    # enable_recursive_icon_lookup = true
 
     # Set icon theme (only used for recursive icon lookup)
-    icon_theme = Adwaita
+    # icon_theme = "Yaru Dark"
     # You can also set multiple icon themes, with the leftmost one being used first.
     # icon_theme = "Adwaita, breeze"
 
@@ -216,13 +206,14 @@
     # Scale small icons up to this size, set to 0 to disable. Helpful
     # for e.g. small files or high-dpi screens. In case of conflict,
     # max_icon_size takes precedence over this.
-    min_icon_size = 32
+    min_icon_size = 16
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 32
+    max_icon_size = 24
 
     # Paths to default icons (only neccesary when not using recursive icon lookup)
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/Humanity-Dark/actions/16:/usr/share/icons/Humanity-Dark/apps/16:/usr/share/icons/Humanity-Dark/devices/16:/usr/share/icons/Humanity-Dark/status/16
 
     ### History ###
 
@@ -255,7 +246,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 5
+    corner_radius = 2
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
@@ -300,9 +291,20 @@
     # * context_all: Open context menu for all notifications.
     # These values can be strung together for each mouse event, and
     # will be executed in sequence.
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = close_current
     mouse_right_click = close_all
+
+    # Defines color of the frame around the notification window.
+    frame_color = "#34224f"
+
+    # Define a color for the separator.
+    # possible values are:
+    #  * auto: dunst tries to find a color fitting to the background;
+    #  * foreground: use the same color as the foreground;
+    #  * frame: use the same color as the frame;
+    #  * anything else will be interpreted as a X color.
+    separator_color = "#171439"
 
 # Experimental features that may or may not work correctly. Do not expect them
 # to have a consistent behaviour across releases.
@@ -314,27 +316,31 @@
     # where there are multiple screens with very different dpi values.
     per_monitor_dpi = false
 
+# colo1: #171439
+# colo2: #34224f
+# colo3: #8e2277
+# colo4: #F8CCE9
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#E9A6A6"
-    foreground = "#1F1D36"
+    foreground = "#F8CCE9"
+    background = "#34224f"
     timeout = 10
     # Icon for notifications with low urgency, uncomment to enable
     #default_icon = /path/to/icon
 
 [urgency_normal]
-    background = "#E9A6A6"
-    foreground = "#1F1D36"
+    foreground = "#F8CCE9"
+    background = "#34224f"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
     #default_icon = /path/to/icon
 
 [urgency_critical]
-    background = "#E9A6A6"
-    foreground = "#FF0062"
-    frame_color = "#FF0062"
+    foreground = "#171439"
+    background = "#8e2277"
+    frame_color = "#8e2277"
 
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
