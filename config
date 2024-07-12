@@ -108,13 +108,13 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Shows a prompt to exit or power down the computer
-set $Locker "$i3path/i3lock.sh"
+set $Locker /home/lopis/dev/i3config/i3lock.sh && sleep 1
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && sleep 1 && systemctl suspend, mode "default"
-    # bindsym h exec --no-startup-id $Locker && sleep 1 && systemctl hibernate, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
@@ -123,9 +123,10 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 bindsym $mod+ctrl+p mode "$mode_system"
-bindsym $mod+ctrl+l exec --no-startup-id "$i3path/i3lock.sh"
+# bindsym $mod+ctrl+l exec --no-startup-id "$i3path/i3lock.sh"
+#i3lock
+bindsym $mod+ctrl+l exec --no-startup-id /home/lopis/dev/i3config/i3lock.sh
 
-#bindsym $mod+ctrl+p exec systemctl poweroff; mode "default"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -159,13 +160,13 @@ bindsym --release Print exec "scrot -f -s /tmp/scrot_screenshot.png; xclip -sele
 # Colors
 
 # primary
-set $color1 #171439
+set $color1 #130500
 # secondary
-set $color2 #34224f
+set $color2 #912900
 # highlight
-set $color3 #8e2277
+set $color3 #db3e00
 # text
-set $color4 #f8cce9
+set $color4 #ffe0d2
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run -fn "Ubuntu" -nb "$color2" -nf "$color4" -sb "$color3" -h 35
@@ -192,7 +193,7 @@ client.placeholder       #000000   #0c0c0c   $color4 #000000   #0c0c0c
 
 client.background       $color2
 
-set $font pango:Lato 16px
+set $font pango:Lato 14px
 
 font $font
 
@@ -203,21 +204,18 @@ bar {
   #i3bar_command i3bar
 	colors {
 		background         $color1
-		statusline         $color
+		statusline         $color4
 		separator          $color1
 
 		# Type             border    backg.    font
-		focused_workspace  $color1   $color2   $color
-		active_workspace   $color1   $color1   $color
-		inactive_workspace $color1   $color1   $color
-		urgent_workspace   #650505   #650505   $color
+		focused_workspace  $color1   $color1   $color4
+		active_workspace   $color1   $color1   $color3
+		inactive_workspace $color1   $color1   $color3
+		urgent_workspace   #650505   #650505   $color3
 	}
   tray_padding         6
-  tray_output DP-2
-  tray_output primary
 	position             top
   status_command       i3blocks -c $i3path/i3blocks.conf
-	#status_command       i3status -c $i3path/i3status.conf
 }
 
 hide_edge_borders both
@@ -384,7 +382,7 @@ exec_always --no-startup-id picom
 #exec_always --no-startup-id "hsetroot -add '#0A4CA3' -add '#210064' -gradient -15"
 #exec_always --no-startup-id "hsetroot -add '#8b51f7' -add '#4f05da' -gradient -15"
 #exec_always --no-startup-id "hsetroot -add '#864879' -add '#6d255e' -gradient -15"
-exec_always --no-startup-id "hsetroot -add '#e453a8' -add '#97009f' -gradient -15"
+exec_always --no-startup-id "hsetroot -add '#e96539' -add '#9f000b' -gradient -15"
 
 # bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 # bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
@@ -392,3 +390,5 @@ exec_always --no-startup-id "hsetroot -add '#e453a8' -add '#97009f' -gradient -1
 # Camera controls
 bindsym $mod+XF86MonBrightnessUp exec --no-startup-id "/bin/zsh $i3path/webcam.sh 10"
 bindsym $mod+XF86MonBrightnessDown exec --no-startup-id "/bin/zsh $i3path/webcam.sh -10"
+
+bindsym $mod+Ctrl+M exec --no-startup-id "gtk-launch google-meet"

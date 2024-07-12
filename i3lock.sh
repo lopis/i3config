@@ -1,21 +1,20 @@
 #!/bin/bash
 
-# primary
-COLOR1='#171439'
-# secondary
-COLOR2='#34224f'
-# highlight
-COLOR3='#8e2277'
-COLOR31='#ff248a'
-# text
-COLOR4='#F8CCE9'
+DARK='#130500'
+COLOR1='#270d09'
+COLOR2='#491d09'
+COLOR3='#912900'
+COLOR4='#db3e00'
+LIGHT='#ffbfa1'
 
-BLANK=$COLOR1
-CLEAR=$COLOR4
-DEFAULT=$COLOR3
-TEXT=$COLOR4
-WRONG=$COLOR31
-VERIFYING=$COLOR2
+BLANK='00000000'
+CLEAR=$LIGHT
+DEFAULT=$COLOR4
+TEXT=$LIGHT
+WRONG=$COLOR4
+TYPING=$COLOR2
+VERIFYING=$COLOR3
+BACKGROUND=$DARK
 
 export LC_ALL=pt_PT.utf8
 
@@ -32,17 +31,18 @@ i3lock \
 --line-color=$BLANK          \
 --separator-color=$DEFAULT   \
 \
---color=$COLOR1              \
+--color=$BACKGROUND          \
 --verif-color=$TEXT          \
 --wrong-color=$TEXT          \
 --time-color=$TEXT           \
 --date-color=$TEXT           \
 --layout-color=$TEXT         \
---keyhl-color=$WRONG         \
---bshl-color=$WRONG          \
+--keyhl-color=$TYPING         \
+--bshl-color=$TYPING          \
 \
 --screen 1                   \
 --clock                      \
 --indicator                  \
 --time-str="%H:%M"           \
 --date-str="%A, %B %d"       \
+# --image=$BACKGROUND

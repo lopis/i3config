@@ -1,0 +1,100 @@
+:root {
+  font-family: Lato !important;
+}
+
+.titlebar-buttonbox-container,
+.titlebar-spacer {
+  display: none !important;
+}
+
+/* Hide "playing" */
+.tab-secondary-label {
+  display: none;
+}
+
+.tab-icon-overlay[soundplaying] {
+  opacity: 1 !important;
+}
+
+tab:not([pinned="true"]) .tab-icon-overlay[soundplaying] {
+  margin-left: 22px;
+  padding: 0px !important;
+}
+
+.tab-icon-image {
+  opacity: 1 !important;
+}
+
+tab {
+  --tab-min-height: 35px;
+}
+
+.tab-background {
+  margin-bottom: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  opacity: 0.8 !important;
+}
+
+tab[selected=true] .tab-background {
+  background: var(--toolbar-bgcolor) !important;
+  opacity: 1 !important;
+}
+
+#urlbar:not([open]) #urlbar-background {
+  display: none !important;
+}
+
+.urlbar-icon {
+  opacity: 0.6;
+}
+
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+  margin: -5px 6px 0 !important;
+  filter: brightness(1) contrast(1) !important;
+  border-radius: 0 !important;
+  height: 0px !important;
+  border: 3px solid var(--identity-icon-color);
+  border-width: 5px 4px 2px 4px;
+  max-width: 0px;
+  border-color: var(--identity-icon-color) var(--identity-icon-color) transparent var(--identity-icon-color);
+  background: transparent !important;
+}
+
+.tab-content {
+	--attention-icon-color: #6698b6;
+  background-position: center bottom calc(3px + var(--tabs-navbar-shadow-size)) !important;
+}
+
+.tabbrowser-tab:not([pinned])[first-visible-tab="true"][last-visible-tab="true"] {
+	max-width: 500px;
+}
+
+.tab-background {
+	position: relative;
+  top: 1px !important;
+}
+.tab-background[selected=true]::before,
+.tab-background[selected=true]::after {
+	content: "";
+	display: inline-block;
+	background: radial-gradient(at left top, transparent 0%, transparent 69%, var(--toolbar-bgcolor) 74%);
+	height: 10px;
+	width: 10px;
+	position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(-9px, 0);
+}
+.tab-background[selected=true]::after {
+	background: radial-gradient(at right top, transparent 0%, transparent 69%, var(--toolbar-bgcolor) 74%);
+  right: 0;
+  left: unset;
+  transform: translate(9px, 0);
+}
+
+html {
+  scrollbar-color: #252A3D #151A2D !important;
+}
+
+

@@ -1,56 +1,98 @@
-@-moz-document
-url-prefix("chrome://devtools/content"),
-url-prefix("about:devtools-toolbox") {
-  .theme-body,
-  .devtools-tabbar,
-  .inspector-responsive-container {
-    --dark: #151A2D;
-    --medium: #252A3D;
-    --light: #2d3349; 
-    --lighter: #3a415a;
-    --theme-toolbar-hover: var(--medium) !important;
-    --theme-body-background: var(--medium) !important;
-    --theme-tab-toolbar-background: var(--dark) !important;
-    --theme-body-background: var(--dark) !important;
-    --theme-sidebar-background: var(--dark) !important;
-    --console-input-background: var(--medium) !important;
-    --rule-header-background-color: var(--dark) !important;
-    --theme-splitter-color: var(--light) !important;
-    --theme-emphasized-splitter-color: var(--light) !important;
-    --theme-emphasized-splitter-color-hover: var(--lighter) !important
-  }
-  .devtools-tab {
-    margin-right: 2px !important;
-    margin-right: 2px !important;
-    margin-top: 2px !important;
-    border-radius: 3px 3px 0 0 !important;
-  }
-  .devtools-tab.selected {
-      background: var(--theme-toolbar-hover) !important;
-  }
-  .devtools-tab-line {
-    display: none !important;
-  }
-  .devtools-tabbar {
-    border: none !important;
-  }
+:root {
+  --color1: #130500;
+  --color2: #491d09;
+  --color3a: #912900;
+  --color3b: rgb(173, 0, 0);
+  --color3b-50: rgba(173, 0, 0, 0.25);
+  --color3b-25: rgba(173, 0, 0, 0.25);
+  --color4a: #ffece3;
+  --color4b: #ffbfa1;
 
-  .devtools-tab > img {
-    height: 12px !important;
-    width: 12px !important;
-    margin-inline: 5px 5px !important;
-    opacity: 0.6 !important;
-  }
+  --green: #2db8bd;
+  --blue: #8185ff;
+  --bluegrey: #9496cd;
+  --purple: #9b6dff;
+  --red: #f353be;
+  --yellow: #92ed84;
+  --lightorange: #f1ffa0;
+  --orange: #ffdf69;
+  --pink: #e373ff;
+  --gray: #9c8db2;
+}
 
-  .devtools-input-toolbar {
-    background: var(--theme-toolbar-hover) !important;
-  }
-
-  html {
-    scrollbar-color: var(--medium) var(--dark) !important;
+/* Tab bar */
+@-moz-document url-prefix("about:devtools-toolbox") {
+  :root {
+    --theme-tab-toolbar-background: var(--color1) !important;
+    --theme-toolbar-color: var(--color4a) !important;
+    --theme-toolbar-selected-color: var(--color4a) !important;
+    --theme-toolbar-hover: var(--color3a) !important;
+    --theme-icon-color: var(--color4a) !important;
+    --tab-line-selected-color: var(--color3a) !important;
+    --theme-icon-checked-color: var(--color3a) !important;
+    --theme-splitter-color: var(--color2) !important;
   }
 }
 
-.search-handoff-button {
-  background: #3F3351 var(--newtab-search-icon) 16px center no-repeat !important;
+/* Tab contents */
+@-moz-document url-prefix("chrome://devtools/content/")
+{
+  :root {
+    --theme-sidebar-background: var(--color1) !important;
+    --theme-body-background: var(--color1) !important;
+    --theme-body-color: var(--color4a) !important;
+    --theme-selection-background: var(--color3a) !important;
+    --theme-selection-color: var(--color1) !important;
+    --theme-icon-dimmed-color: var(--color4b) !important;
+
+    --theme-splitter-color: var(--color2) !important;
+    --toolbarbutton-background: var(--color3a) !important;
+    --toolbarbutton-hover-background: var(--color3b) !important;
+    --theme-toolbarbutton-color: var(--color4b) !important;
+
+    --theme-icon-error-color: #dc3f2e !important;
+
+    /* syntax color scheme */
+    --theme-text-color-strong: var(--color4a);
+    --theme-highlight-green: var(--green) !important;
+    --theme-highlight-blue: var(--blue) !important;
+    --theme-highlight-purple: var(--purple) !important;
+    --theme-highlight-red: var(--red) !important;
+    --theme-highlight-yellow: var(--yellow) !important;
+    --theme-highlight-bluegrey: var(--bluegrey) !important;
+    --theme-highlight-lightorange: var(--lightorange) !important;
+    --theme-highlight-orange: var(--orange) !important;
+    --theme-highlight-pink: var(--pink) !important;
+    --theme-highlight-gray: var(--gray) !important;
+
+    /* inner toolbar */
+    --theme-tab-toolbar-background: var(--color1) !important;
+    --theme-toolbar-color: var(--color4a) !important;
+    --theme-toolbar-selected-color: var(--color4a) !important;
+    --theme-toolbar-background: var(--color2) !important;
+    --theme-icon-color: var(--color4a) !important;
+    --tab-line-selected-color: var(--color3a) !important;
+    --theme-icon-checked-color: var(--color3a) !important;
+    --rule-header-background-color: var(--color2) !important;
+
+    --console-message-border: var(--color2) !important;
+    --console-error-background: var(--color3b-25) !important;
+    --console-error-border: var(--color3b-50) !important;
+    --theme-warning-background: rgba(235, 255, 0, 0.16) !important;
+    --theme-warning-border: rgba(235, 255, 0, 0.32) !important;
+  }
+
+  .theme-dark .generic-chart-container {
+    color: inherit !important;
+  }
+
+  /* fix network headers details using this color for text */
+  .network-monitor .tabpanel-summary-value {
+    --theme-selection-color: var(--color4a) !important;
+  }
+
+  /* fix for selected item icon */
+  .sources-list .tree .focused .img {
+    background-color: var(--color1) !important;
+  }
 }
