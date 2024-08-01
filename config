@@ -160,13 +160,13 @@ bindsym --release Print exec "scrot -f -s /tmp/scrot_screenshot.png; xclip -sele
 # Colors
 
 # primary
-set $color1 #130500
+set $color1 #130600
 # secondary
-set $color2 #912900
+set $color2 #3a1200
 # highlight
-set $color3 #db3e00
+set $color3 #e44800
 # text
-set $color4 #ffe0d2
+set $color4 #ffe4d8
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run -fn "Ubuntu" -nb "$color2" -nf "$color4" -sb "$color3" -h 35
@@ -174,14 +174,11 @@ bindsym $mod+d exec --no-startup-id dmenu_run -fn "Ubuntu" -nb "$color2" -nf "$c
 # so you need that installed.
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# Emoji🤣
-bindsym $mod+shift+e exec --no-startup-id ./dev/i3config/dmoji
-
 
 # class                  border    backgr.   text    indicator child_border
 client.focused           $color1   $color1   $color4 $color4   $color1
-client.focused_inactive  $color1   $color1   $color4 #484e50   #bdbdbd
-client.unfocused         $color2   $color2   $color3 #292d2e   #bdbdbd
+client.focused_inactive  $color1   $color1   $color3 #484e50   #bdbdbd
+client.unfocused         $color1   $color1   $color3 #292d2e   #bdbdbd
 client.urgent            $color3   $color3   $color4 #900000   #900000
 client.placeholder       #000000   #0c0c0c   $color4 #000000   #0c0c0c
 
@@ -211,7 +208,7 @@ bar {
 		focused_workspace  $color1   $color1   $color4
 		active_workspace   $color1   $color1   $color3
 		inactive_workspace $color1   $color1   $color3
-		urgent_workspace   #650505   #650505   $color3
+		urgent_workspace   $color3   $color3   $color4
 	}
   tray_padding         6
 	position             top
@@ -382,7 +379,7 @@ exec_always --no-startup-id picom
 #exec_always --no-startup-id "hsetroot -add '#0A4CA3' -add '#210064' -gradient -15"
 #exec_always --no-startup-id "hsetroot -add '#8b51f7' -add '#4f05da' -gradient -15"
 #exec_always --no-startup-id "hsetroot -add '#864879' -add '#6d255e' -gradient -15"
-exec_always --no-startup-id "hsetroot -add '#e96539' -add '#9f000b' -gradient -15"
+exec_always --no-startup-id "hsetroot -add '#ff5900' -add '#9e000b' -gradient -15"
 
 # bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 # bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks

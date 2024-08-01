@@ -96,3 +96,9 @@
     background-color: var(--color1) !important;
   }
 }
+
+@-moz-document url("about:newtab"), url("about:home") {
+  .search-wrapper .search-handoff-button, .search-wrapper input {
+    --newtab-background-color-secondary: var(--color3a);
+  }
+}
