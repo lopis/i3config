@@ -28,7 +28,7 @@
   display: none;
 }
 
-#toolbar-menubar[inactive="true"] + #TabsToolbar {
+#toolbar-menubar[inactive="true"]+#TabsToolbar {
   display: none;
 }
 
@@ -50,24 +50,17 @@
   overflow: hidden !important;
   box-shadow: 0 0 5px black;
   background: #421500;
+  margin: 8px;
 }
 
-.browserStack::after {
-  content: "";
-  border-radius: 10px !important;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  box-shadow: 1px 1px 4px -2px #ffffff66 inset;
-  z-index: 1;
+[inFullscreen="true"] .browserStack {
+  margin: 0;
+  border-radius: 20px !important;
+  background: black;
 }
 
 .browserStack browser[type="content"] {
-  clip-path: inset(0% 100% 0% 100% round 10px);
+  clip-path: inset(0 0 0 0 round 10px);
 }
 
 .devtools-toolbox-side-iframe {
@@ -76,7 +69,7 @@
 }
 
 .browserSidebarContainer {
-	gap: 4px;
+  gap: 4px;
 }
 
 .devtools-side-splitter {
@@ -87,22 +80,12 @@
 }
 
 .browserSidebarContainer {
-	gap: 6px;
+  gap: 6px;
 }
 
 .devtools-side-splitter:not(:hover) {
-	opacity: 0;
+  opacity: 0;
 }
-
-/* #nav-bar {
-  transition: all 50ms ease-in-out !important;
-  opacity: 1.0;
-}
-
-#nav-bar:not(:hover):not(:focus-within) {
-  opacity: 0.5;
-} */
-
 
 /* Extensions panel grid */
 #unified-extensions-area,

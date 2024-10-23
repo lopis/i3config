@@ -70,9 +70,11 @@ echo monitor mode is $monitor_mode
 
 # Set screen mode
 if [ $monitor_mode = "external" ]; then
+  echo "## xrandr --output ${INTERNAL_OUTPUT} --off --output ${EXTERNAL_OUTPUT} --auto"
   xrandr --output $INTERNAL_OUTPUT --off --output $EXTERNAL_OUTPUT --auto
   monitor_mode="internal"
 elif [ $monitor_mode = "internal" ]; then
+  echo "## xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --off"
   xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --off
   monitor_mode="mirror"
 elif [ $monitor_mode = "mirror" ]; then

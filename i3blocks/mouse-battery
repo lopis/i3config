@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Usage:
+# [mouse]
+# command=./i3blocks/mouse-battery
+# markup=pango
+# COLOR=#FF3834
+# interval=5
+
+# Find the first device that contains "mouse" in its name
+DEVICE=$(upower -e | grep -i "mouse" | head -n 1)
+BATTERY=$(upower -i $DEVICE | grep "percentage" | awk '{print $2}' | tr -d '%')
+
+# Battery Level icons
+BATTERY_LEVEL_10="󰁺"
+BATTERY_LEVEL_20="󰁻"
+BATTERY_LEVEL_30="󰁼"
+BATTERY_LEVEL_40="󰁽"
+BATTERY_LEVEL_50="󰁾"
+BATTERY_LEVEL_60="󰁿"
+BATTERY_LEVEL_70="󰂀"
+BATTERY_LEVEL_80="󰂁"
+BATTERY_LEVEL_90="󰂂"
+BATTERY_LEVEL_100="󰁹"
+
+MOUSE_ICON=""
+
+# Check if the battery information was found
+if [ -n "$BATTERY" ]; then
+
+    if [ "$BATTERY" -le 10 ]; then
+        ICON=$BATTERY_LEVEL_10
+    elif [ "$BATTERY" -le 20 ]; then
+        ICON=$BATTERY_LEVEL_20
+    elif [ "$BATTERY" -le 30 ]; then
+        ICON=$BATTERY_LEVEL_30
+    elif [ "$BATTERY" -le 40 ]; then
+        ICON=$BATTERY_LEVEL_40
+    elif [ "$BATTERY" -le 50 ]; then
+        ICON=$BATTERY_LEVEL_50
+    elif [ "$BATTERY" -le 60 ]; then
+        ICON=$BATTERY_LEVEL_60
+    elif [ "$BATTERY" -le 70 ]; then
+        ICON=$BATTERY_LEVEL_70
+    elif [ "$BATTERY" -le 80 ]; then
+        ICON=$BATTERY_LEVEL_80
+    elif [ "$BATTERY" -le 90 ]; then
+        ICON=$BATTERY_LEVEL_90
+    else
+        ICON=$BATTERY_LEVEL_100
+    fi
+
+    if [ "$BATTERY" -le 20 ]; then
+        COLOR=${COLOR:-${1:-"#FF0000"}}
+        echo "<span color=\"$COLOR\">${MOUSE_ICON}${ICON}</span>"
+    else
+        echo "${MOUSE_ICON}${ICON}"
+    fi
+fi

@@ -3,7 +3,8 @@
 
 #Mod4 = super key
 set $mod Mod4
-set $i3path /home/lopis/dev/i3config
+set $alt Mod1
+set $i3path ~/.config/i3
 
 # custom variables for workspaces
 set $ws1 1
@@ -108,15 +109,15 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Shows a prompt to exit or power down the computer
-set $Locker /home/lopis/dev/i3config/i3lock.sh && sleep 1
-set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+set $Locker $i3path/i3lock.sh && sleep 1
+set $mode_system L̲ogout   S̲uspend   R̲eboot   Shut̲down
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    # bindsym k exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $i3path/i3lock.sh && sleep 1 && systemctl suspend, mode "default"
+    # bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym t exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -125,7 +126,7 @@ mode "$mode_system" {
 bindsym $mod+ctrl+p mode "$mode_system"
 # bindsym $mod+ctrl+l exec --no-startup-id "$i3path/i3lock.sh"
 #i3lock
-bindsym $mod+ctrl+l exec --no-startup-id /home/lopis/dev/i3config/i3lock.sh
+bindsym $mod+ctrl+l exec --no-startup-id $i3path/i3lock.sh
 
 
 # resize window (you can also use the mouse for that)
@@ -168,18 +169,11 @@ set $color3 #e44800
 # text
 set $color4 #ffe4d8
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -fn "Ubuntu" -nb "$color2" -nf "$color4" -sb "$color3" -h 35
-# There also is the (new) i3-dmenu-desktop which only displays applications shipping a .desktop file. It is a wrapper around dmenu,
-# so you need that installed.
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-
 # class                  border    backgr.   text    indicator child_border
 client.focused           $color1   $color1   $color4 $color4   $color1
 client.focused_inactive  $color1   $color1   $color3 #484e50   #bdbdbd
 client.unfocused         $color1   $color1   $color3 #292d2e   #bdbdbd
-client.urgent            $color3   $color3   $color4 #900000   #900000
+client.urgent            $color3   $color3   $color1 #900000   #900000
 client.placeholder       #000000   #0c0c0c   $color4 #000000   #0c0c0c
 
 # client.focused           #00000000 #00000000 $color1 $color4   $color1
@@ -208,11 +202,11 @@ bar {
 		focused_workspace  $color1   $color1   $color4
 		active_workspace   $color1   $color1   $color3
 		inactive_workspace $color1   $color1   $color3
-		urgent_workspace   $color3   $color3   $color4
+		urgent_workspace   $color3   $color3   $color1
 	}
   tray_padding         6
 	position             top
-  status_command       i3blocks -c $i3path/i3blocks.conf
+  status_command       i3blocks -c $i3path/i3blocks.conf 2> ~/.i3blocks.log
 }
 
 hide_edge_borders both
@@ -220,6 +214,13 @@ hide_edge_borders both
 #Place the external monitor on top
 #To get screen names: xrandr --listactivemonitors
 #xrandr --output DP1 --auto --pos 0x0 --output eDP1 --auto --pos 320x1440
+
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id dmenu_run -fn "Ubuntu" -nb "$color2" -nf "$color4" -sb "$color3" -h 35
+# There also is the (new) i3-dmenu-desktop which only displays applications shipping a .desktop file. It is a wrapper around dmenu,
+# so you need that installed.
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # launch Calculator
 bindsym $mod+c exec "galculator"
@@ -251,12 +252,12 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Mouse Buttons
-bindsym $mod+button8 exec --no-startup-id playerctl next
+bindsym --whole-window $mod+button8 exec --no-startup-id playerctl previous
+bindsym --whole-window $mod+button9 exec --no-startup-id playerctl next
 
-set $spotifyCmd dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2
-bindsym $mod+XF86AudioMute exec --no-startup-id "$spotifyCmd org.mpris.MediaPlayer2.Player.PlayPause"
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id "$spotifyCmd org.mpris.MediaPlayer2.Player.Next"
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id "$spotifyCmd org.mpris.MediaPlayer2.Player.Previous"
+bindsym $alt+Down exec --no-startup-id playerctl play-pause
+bindsym $alt+Right exec --no-startup-id playerctl next
+bindsym $alt+Left exec --no-startup-id playerctl previous
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 20 # increase screen brightness
@@ -268,27 +269,25 @@ bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xrandr --output DP-1 --br
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xrandr --output DP-1 --brightness 1
 
 #Enable natural scrolling
-exec --no-startup-id synclient HorizEdgeScroll=0 VertEdgeScroll=0 HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertScrollDelta=-90 HorizScrollDelta=-90
-
-exec --no-startup-id "/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh; export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK"
+# exec --no-startup-id synclient HorizEdgeScroll=0 VertEdgeScroll=0 HorizTwoFingerScroll=1 VertTwoFingerScroll=1 VertScrollDelta=-90 HorizScrollDelta=-90
+# exec --no-startup-id "/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh; export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK"
 
 # Open file manager
 bindsym $mod+e exec --no-startup-id nautilus
-
-# Connect to VPN
-bindsym $mod+Ctrl+V exec 'sudo ipsec up NordVPN'
-bindsym $mod+Ctrl+Shift+V exec 'sudo ipsec down NordVPN'
 
 # x-kill kills a window
 bindsym $mod+Ctrl+X --release exec --no-startup-id xkill
 
 # Shows a prompt to choose monitor mode
-set $mode_monitors Monitor Mode (e) external, (i) internal, (a) all, (m) mirror, (c) cycle
+set $mode_monitors Monitor:  E̲xternal  I̲nternal  A̲ll  M̲irror  N̲ext  C̲onfig
 mode "$mode_monitors" {
+    set $font pango:"DejaVu Sands Mono" 14px
+
     bindsym e exec --no-startup-id $i3path/monitors.sh external || notify-send "monitors.sh not found", mode "default"
     bindsym i exec --no-startup-id $i3path/monitors.sh internal || notify-send "monitors.sh not found", mode "default"
     bindsym a exec --no-startup-id $i3path/monitors.sh all || notify-send "monitors.sh not found", mode "default"
     bindsym m exec --no-startup-id $i3path/monitors.sh mirror || notify-send "monitors.sh not found", mode "default"
+    bindsym n exec --no-startup-id $i3path/monitors.sh || notify-send "monitors.sh not found", mode "default"
     bindsym c exec --no-startup-id $i3path/monitors.sh || notify-send "monitors.sh not found", mode "default"
 
     # back to normal: Entelight -A -b 20r or Escape
@@ -309,9 +308,11 @@ mode "$mode_audio" {
 }
 bindsym $mod+ctrl+a mode "$mode_audio"
 
+exec setxkbmap -layout pt
+exec --no-startup-id export GTK_THEME=Yaru-dark
 
 # Reset counter
-bindsym $mod+Ctrl+0 exec "pkill pomodoro.sh; rm -rf /tmp/termdown.tmp; $i3path/pomodoro.sh"
+# bindsym $mod+Ctrl+0 exec "pkill pomodoro.sh; rm -rf /tmp/termdown.tmp; $i3path/pomodoro.sh"
 
 ## Workspace specific settings
 # Assign Workspaces:
@@ -322,8 +323,6 @@ bindsym $mod+Ctrl+0 exec "pkill pomodoro.sh; rm -rf /tmp/termdown.tmp; $i3path/p
 # Necessary for i3-gaps to work properly (pixel can be any value)
 for_window [class="^.*"] border pixel 0
 
-
-#for_window [class="Firefox"] move to workspace $ws1
 for_window [class="Firefox" window_role="Organizer"] floating enable resize set 900 650
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Blueman-manager"] floating enable
@@ -346,6 +345,8 @@ for_window [class="File-roller"] floating enable resize set 900 650
 for_window [class="Galculator"] floating enable
 for_window [class="Gnome-terminal"] floating enable
 
+for_window [class="ecosiabrowser.exe"] floating enable, resize set 1200 900, move position center
+
 # Smart Gaps
 # smart_gaps on
 
@@ -366,26 +367,10 @@ exec --no-startup-id nm-applet
 # exec --no-startup-id telegram
 # exec --no-startup-id blueman-applet
 
-# Set wallpaper
-# exec --no-startup-id "feh --bg-scale ~/Pictures/Wallpapers/*"
-
 # Switch to workspace 1 at startup
 exec --no-startup-id i3-msg workspace $ws1
 
-exec_always --no-startup-id picom
+exec_always --no-startup-id picom --config $i3path/picom.conf -b
 
 # Sets a background color
-#exec_always --no-startup-id "hsetroot -add '#9a2e7e' -add '#031d50' -gradient 0"
-#exec_always --no-startup-id "hsetroot -add '#0A4CA3' -add '#210064' -gradient -15"
-#exec_always --no-startup-id "hsetroot -add '#8b51f7' -add '#4f05da' -gradient -15"
-#exec_always --no-startup-id "hsetroot -add '#864879' -add '#6d255e' -gradient -15"
-exec_always --no-startup-id "hsetroot -add '#ff5900' -add '#9e000b' -gradient -15"
-
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-
-# Camera controls
-bindsym $mod+XF86MonBrightnessUp exec --no-startup-id "/bin/zsh $i3path/webcam.sh 10"
-bindsym $mod+XF86MonBrightnessDown exec --no-startup-id "/bin/zsh $i3path/webcam.sh -10"
-
-bindsym $mod+Ctrl+M exec --no-startup-id "gtk-launch google-meet"
+exec_always --no-startup-id "hsetroot -add '#ff5900' -add '#9e000b' -gradient 45 -root"

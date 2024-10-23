@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Usage:
+# [bose]
+# command=./i3blocks/bose-battery
+# markup=pango
+# COLOR=#FF1C1A
+# interval=5
+# device=Bose
+
+get_battery_status() {
+    local device_name=$1
+    local label_icon=$2
+
+    # Define your headphones' MAC address here
+    local device_mac=$(bluetoothctl devices | grep -i "$device_name" | awk '{print $2}')
+
+    # Use bluetoothctl to get device information
+    local battery=$(bluetoothctl info $device_mac | grep "Battery Percentage" | awk -F '[()]' '{print $2}')
+
+    # Battery Level icons
+    local battery_level_10="󰁺"
+    local battery_level_20="󰁻"
+    local battery_level_30="󰁼"
+    local battery_level_40="󰁽"
+    local battery_level_50="󰁾"
+    local battery_level_60="󰁿"
+    local battery_level_70="󰂀"
+    local battery_level_80="󰂁"
+    local battery_level_90="󰂂"
+    local battery_level_100="󰁹"
+
+    # Check if the battery information was found
+    if [ -n "$battery" ]; then
+
+        if [ "$battery" -le 10 ]; then
+            icon=$battery_level_10
+        elif [ "$battery" -le 20 ]; then
+            icon=$battery_level_20
+        elif [ "$battery" -le 30 ]; then
+            icon=$battery_level_30
+        elif [ "$battery" -le 40 ]; then
+            icon=$battery_level_40
+        elif [ "$battery" -le 50 ]; then
+            icon=$battery_level_50
+        elif [ "$battery" -le 60 ]; then
+            icon=$battery_level_60
+        elif [ "$battery" -le 70 ]; then
+            icon=$battery_level_70
+        elif [ "$battery" -le 80 ]; then
+            icon=$battery_level_80
+        elif [ "$battery" -le 90 ]; then
+            icon=$battery_level_90
+        else
+            icon=$battery_level_100
+        fi
+
+        if [ "$battery" -le 20 ]; then
+            color=${COLOR:-${1:-"#FF0000"}}
+            echo "<span color=\"$color\">${label_icon}$icon</span>"
+        else
+            echo "${label_icon}$icon"
+        fi
+    fi
+}
+
+# Call the function with the device name from the environment variable
+get_battery_status "$device" "$icon"

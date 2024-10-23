@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Displays the default device, volume, and mute status for i3blocks
 
 set -a
@@ -48,8 +48,8 @@ while getopts F:Sf:adH:M:L:X:T:t:C:c:i:m:s:h opt; do
         s) SCONTROL="$OPTARG" ;;
         h) printf \
 "Usage: volume-pulseaudio [-S] [-F format] [-f format] [-p] [-a|-d] [-H symb] [-M symb]
-        [-L symb] [-X symb] [-T thresh] [-t thresh] [-C color] [-c color] [-i inter]
-        [-m mixer] [-s scontrol] [-j] [-h]
+        [-L symb] [-X symb] [-T thresh] [-t thresh] [-C color] [-c color] [-i inter] 
+        [-m mixer] [-s scontrol] [-h]
 Options:
 -F, -f\tOutput format (-F long format, -f short format) to use, with exposed variables:
 \${SYMB}, \${VOL}, \${INDEX}, \${NAME}
@@ -88,20 +88,30 @@ CAPABILITY=$(amixer -D $MIXER get $SCONTROL | sed -n "s/  Capabilities:.*cvolume
 
 function move_sinks_to_new_default {
     DEFAULT_SINK=$1
-    pacmd list-sink-inputs | grep index: | grep -o '[0-9]\+' | while read SINK
+    pactl list sink-inputs | grep 'Sink Input #' | grep -o '[0-9]\+' | while read SINK
     do
-        pacmd move-sink-input $SINK $DEFAULT_SINK
+        pactl move-sink-input $SINK $DEFAULT_SINK
     done
 }
 
 function set_default_playback_device_next {
     inc=${1:-1}
-    num_devices=$(pacmd list-sinks | grep -c index:)
-    sink_arr=($(pacmd list-sinks | grep index: | grep -o '[0-9]\+'))
-    default_sink_index=$(( $(pacmd list-sinks | grep index: | grep -no '*' | grep -o '^[0-9]\+') - 1 ))
+    num_devices=$(pactl list sinks | grep -c Name:)
+
+    # lopis: Small change here: filter out HDMI sinks.
+    sink_arr=($(pactl list sinks | awk '
+BEGIN { RS = "" } 
+{
+    if ($0 !~ /HDMI/) {
+        print $0
+    }
+}
+' | grep Name: | sed -r 's/\s+Name: (.+)/\1/'))
+    default_sink=$(pactl get-default-sink)
+    default_sink_index=$(for i in "${!sink_arr[@]}"; do if [[ "$default_sink" = "${sink_arr[$i]}" ]]; then echo "$i"; fi done)
     default_sink_index=$(( ($default_sink_index + $num_devices + $inc) % $num_devices ))
     default_sink=${sink_arr[$default_sink_index]}
-    pacmd set-default-sink $default_sink
+    pactl set-default-sink $default_sink
     move_sinks_to_new_default $default_sink
 }
 
@@ -113,46 +123,48 @@ case "$BLOCK_BUTTON" in
     5) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY $AUDIO_DELTA%- ;;
 esac
 
-
 function print_format {
-    if [[ $markup == "pango" ]] ; then
-        output="<span color=\"$2\">$1</span>"
-    else
-        output=$1
-    fi
-
-    echo "$output" | envsubst '${SYMB}${VOL}${INDEX}${NAME}'
+    echo "$1" | envsubst '${SYMB}${VOL}${INDEX}${NAME}'
 }
 
 function print_block {
-    ACTIVE=$(pacmd list-sinks | grep "state\: RUNNING" -B4 -A7 | grep "index:\|name:\|volume: \(front\|mono\)\|muted:")
-    [[ -z "$ACTIVE" ]] && ACTIVE=$(pacmd list-sinks | grep "index:\|name:\|volume: \(front\|mono\)\|muted:" | grep -A3 '*')
-    for name in INDEX NAME VOL MUTED; do
-        read $name
+    ACTIVE="$(pactl list sinks  | grep "State\: RUNNING" -B4 -A55)"
+    if [[ $ACTIVE = "" ]] ; then
+        ACTIVE="$(pactl list sinks | grep "$(pactl get-default-sink)" -B4 -A55)"
+    fi
+    ACTIVE="$(echo "$ACTIVE" | grep "Name:\|Volume: \(front-left\|mono\)\|Mute:\|api.alsa.pcm.card = \|node.nick = ")"
+    for Name in NAME MUTED VOL INDEX NICK; do
+        read $Name
     done < <(echo "$ACTIVE")
-    INDEX=$(echo "$INDEX" | grep -o '[0-9]\+')
+    INDEX=$(echo "$INDEX"  | grep -o '".*"' | sed 's/"//g')
     VOL=$(echo "$VOL" | grep -o "[0-9]*%" | head -1 )
     VOL="${VOL%?}"
-
-    NAME=$(echo "$NAME" | sed \
-'s/.*<.*\.\(.*\)>.*/\1/; t;'\
-'s/.*<\(.*\)>.*/\1/; t;'\
-'s/.*/unknown/')
+    NAME=$(echo "$NICK" | grep -o '".*"' | sed 's/"//g')
 
     if [[ $USE_ALSA_NAME == 1 ]] ; then
-        ALSA_NAME=$(pacmd list-sinks |\
+        ALSA_NAME=$(pactl list sinks |\
 awk '/^\s*\*/{f=1}/^\s*index:/{f=0}f' |\
 grep "alsa.name\|alsa.mixer_name" |\
 head -n1 |\
 sed 's/.*= "\(.*\)".*/\1/')
         NAME=${ALSA_NAME:-$NAME}
     elif [[ $USE_DESCRIPTION == 1 ]] ; then
-        DESCRIPTION=$(pacmd list-sinks |\
-awk '/^\s*\*/{f=1}/^\s*index:/{f=0}f' |\
-grep -e "device.profile.description" -e "device.description" |\
-head -n1 |\
-sed 's/.*= "\(.*\)".*/\1/')
+        # DESCRIPTION=$(pactl list sinks  | grep "State\: RUNNING" -B4 -A55 | grep 'Description: ' | sed 's/^.*: //')
+        DEFAULT_SINK=$(pactl get-default-sink)
+        DESCRIPTION=$(pactl list sinks  | grep -A55 -B4 -E "Name: $DEFAULT_SINK" | grep 'Description: ' | sed 's/^.*: //')
         NAME=${DESCRIPTION:-$NAME}
+    fi
+
+    if [[ "$NAME" == *"Speaker + Headphones"* ]]; then
+        NAME="󰜟"
+    fi
+
+    if [[ "$NAME" == "Bose Joao" ]]; then
+        NAME="󰋋"
+    fi
+
+    if [[ "$NAME" == *"Earbuds"* ]]; then
+        NAME="󱡏"
     fi
 
     if [[ $MUTED =~ "no" ]] ; then
@@ -165,10 +177,17 @@ sed 's/.*= "\(.*\)".*/\1/')
         COLOR=$MUTED_COLOR
     fi
 
-    print_format "$LONG_FORMAT" $COLOR
-    if [[ $SUBSCRIBE != 1 ]] ; then
-        print_format "$SHORT_FORMAT" $COLOR
-        echo $COLOR
+    if [[ $ACTIVE = "" ]] ; then
+        echo "Sound inactive"
+        COLOR=$MUTED_COLOR
+    fi
+
+    if [[ $SUBSCRIBE == 1 ]] ; then
+        print_format "$LONG_FORMAT"
+    else
+        print_format "$LONG_FORMAT"
+        print_format "$SHORT_FORMAT"
+        echo "$COLOR"
     fi
 }
 

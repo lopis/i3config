@@ -36,7 +36,7 @@ else:
                 time = re.match(r"(\d+):(\d+)", time)
                 if time:
                     time = ":".join(time.groups())
-                    timeleft = " ({})".format(time)
+                    timeleft = "{}".format(time)
                 else:
                     timeleft = ""
 
@@ -55,51 +55,64 @@ else:
     color = config.get("color_charging", "yellow")
     FA_LIGHTNING = "<span color='{}'><span font='FontAwesome'>\uf0e7</span></span>".format(color)
 
-    # stands for plugged in
-    FA_PLUG = "<span font='FontAwesome'>\uf1e6</span>"
+    ICON_FULL_CHARGING = "󰂅"
+    ICON_HALF_CHARGING = "󰢝"
+    ICON_LOW_CHARGING = "󰢜"
+    ICON_FULL_DISCHARGING = "󰁹"
+    ICON_HALF_DISCHARGING = "󰁾"
+    ICON_LOW_DISCHARGING = "󰁺"
 
-    # stands for using battery
-    FA_BATTERY = "<span font='FontAwesome'>\uf240</span>"
-
-    # stands for unknown status of battery
-    FA_QUESTION = "<span font='FontAwesome'>\uf128</span>"
-
-
-    if state == "Discharging":
-        fulltext = FA_BATTERY + " "
-    elif state == "Full":
-        fulltext = FA_PLUG + " "
-        timeleft = ""
-    elif state == "Unknown":
-        fulltext = FA_QUESTION + " " + FA_BATTERY + " "
-        timeleft = ""
+    if state == "Unknown":
+        fulltext = "<span color=\"yellow\">󰂑</span>"
     else:
-        fulltext = FA_LIGHTNING + " " + FA_PLUG + " "
+        fulltext = ""
+        if state == "Discharging":
+            ICON_FULL = ICON_FULL_DISCHARGING
+            ICON_HALF = ICON_HALF_DISCHARGING
+            ICON_LOW = ICON_LOW_DISCHARGING
+        elif state == "Full":
+            ICON_FULL = ICON_FULL_CHARGING
+            ICON_HALF = ICON_HALF_CHARGING
+            ICON_LOW = ICON_LOW_CHARGING
+        else:
+            ICON_FULL = ICON_FULL_CHARGING
+            ICON_HALF = ICON_HALF_CHARGING
+            ICON_LOW = ICON_LOW_CHARGING
 
-    def color(percent):
-        if percent < 10:
-            # exit code 33 will turn background red
-            fulltext += timeleft
-            return config.get("color_10", "#FFFFFF")
-        if percent < 20:
-            fulltext += timeleft
-            return config.get("color_20", "#FF3300")
-        if percent < 30:
-            fulltext += timeleft
-            return config.get("color_30", "#FF6600")
-        if percent < 40:
-            return config.get("color_40", "#FF9900")
-        if percent < 50:
-            return config.get("color_50", "#FFCC00")
-        if percent < 60:
-            return config.get("color_60", "#FFFF00")
-        if percent < 70:
-            return config.get("color_70", "#FFFF33")
-        if percent < 80:
-            return config.get("color_80", "#FFFF66")
-        return config.get("color_full", "#FFFFFF")
+        def color(percent):
+            if percent < 10:
+                return config.get("color_10", "#FFFFFF")
+            if percent < 20:
+                return config.get("color_20", "#FF3300")
+            if percent < 30:
+                return config.get("color_30", "#FF6600")
+            if percent < 40:
+                return config.get("color_40", "#FF9900")
+            if percent < 50:
+                return config.get("color_50", "#FFCC00")
+            if percent < 60:
+                return config.get("color_60", "#FFFF00")
+            if percent < 70:
+                return config.get("color_70", "#FFFF33")
+            if percent < 80:
+                return config.get("color_80", "#FFFF66")
+            return config.get("color_full", "#FFFFFF")
 
-    form =  '<span color="{}">{} {}%</span>'
-    fulltext = form.format(color(percentleft), fulltext, percentleft)
+        if percentleft < 20:
+            form =  '<span color="{}">{}% ({}) {}</span>'
+            icon = ICON_LOW
+            fulltext = form.format(color(percentleft), percentleft, timeleft, icon)
+        elif state == 'Not charging' or state == 'Full':
+            form =  '<span color="{}">{}</span>'
+            icon = ICON_FULL
+            fulltext = form.format(color(percentleft), icon)
+        else:
+            form =  '<span color="{}">{} {}</span>'
+            if percentleft < 75:
+                icon = ICON_HALF
+            else:
+                icon = ICON_FULL
+            fulltext = form.format(color(percentleft), percentleft, icon)
+
 
 print(fulltext)
